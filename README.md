@@ -1,35 +1,74 @@
-# Ristorante Rossini Menu
+<div align="center">
 
-A restaurant menu website for Ristorante Rossini, hosted with Firebase Hosting.
+# 🍝 Ristorante Rossini Menu
 
-## Live Website
+**A multilingual restaurant menu website powered by Firebase.**
 
-https://ristorante-rossini.web.app/
+[🌐 Open Live Website](https://ristorante-rossini.web.app/) · [📦 View Repository](https://github.com/anabaid2000-collab/ristorante-rossini-menu)
 
-## Project
+![HTML](https://img.shields.io/badge/HTML-5-orange?logo=html5&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript&logoColor=black)
+![Firebase](https://img.shields.io/badge/Firebase-Hosting-FFCA28?logo=firebase&logoColor=black)
 
-This repository contains the website files and Firebase configuration for the Ristorante Rossini menu project.
+</div>
 
-## Technology
+---
 
-- HTML, CSS, and JavaScript
-- Firebase Hosting
-- Firebase project configuration and security rules
+## ✨ About the Project
 
-## Local Development
+Ristorante Rossini Menu is a web-based restaurant menu designed to make menu items accessible in multiple languages. The project repository contains the website source files and Firebase configuration.
 
-1. Clone this repository.
-2. Open the project folder.
-3. Preview `index.html` in a browser or use your preferred local development server.
+## 🌍 Languages
 
-## Deployment
+The project is intended to support six menu languages:
 
-Firebase CLI is used to deploy the Hosting site. From the configured project directory, run:
+- 🇮🇹 Italian
+- 🇬🇧 English
+- 🇩🇪 German
+- 🇪🇸 Spanish
+- 🇵🇹 Portuguese
+- 🇫🇷 French
+
+Language translation and admin features depend on the corresponding Firebase configuration and deployed functions being set up correctly.
+
+## 🧰 Built With
+
+- **HTML, CSS and JavaScript** — website interface and behaviour
+- **Firebase Hosting** — live website hosting
+- **Cloud Firestore and Firebase Security Rules** — menu data and access control
+- **Firebase Cloud Functions** — server-side functionality, where configured
+
+## 🚀 Live Demo
+
+Visit the website: **https://ristorante-rossini.web.app/**
+
+## 🛠️ Deployment
+
+Deploy the website files to Firebase Hosting from the configured project directory:
 
 ```bash
 firebase deploy --only hosting
 ```
 
-## Maintainer
+If you are updating configured Cloud Functions or Firestore rules as well, use the appropriate deployment targets, for example:
 
-GitHub: [anabaid2000-collab](https://github.com/anabaid2000-collab)
+```bash
+firebase deploy --only hosting,functions,firestore:rules
+```
+
+Run the second command only after confirming the Functions and Firestore configuration is ready.
+
+## 🔐 Security Notes
+
+- Never commit API keys, passwords, service-account files, or other secrets.
+- Keep AI provider keys in Firebase Secret Manager or another appropriate server-side secret store.
+- Review Firestore rules before deploying changes.
+- Do not remove the existing authenticated admin account when maintaining the Admin Panel.
+
+## 📁 Repository
+
+The default branch is `main`. The live site is hosted separately on Firebase Hosting; committing to GitHub does not by itself deploy the site unless a deployment workflow is configured.
+
+## 👩‍💻 Maintainer
+
+GitHub: [@anabaid2000-collab](https://github.com/anabaid2000-collab)
