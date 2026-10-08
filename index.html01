@@ -1,7 +1,7 @@
-import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";import {getFirestore,collection,doc,setDoc,addDoc,updateDoc,deleteDoc,onSnapshot,getDocs} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";import {getFirestore,collection,doc,setDoc,addDoc,updateDoc,deleteDoc,onSnapshot,getDocs} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";import {getFunctions,httpsCallable} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-functions.js";
 const firebaseConfig={apiKey:"AIzaSyCvLtUCpKWhVeMh7QcbrlJZpvtAPAIplXo",authDomain:"ristorante-rossini.firebaseapp.com",projectId:"ristorante-rossini",storageBucket:"ristorante-rossini.firebasestorage.app",appId:"1:886098533105:web:6528ce9772520d02b4e750"};
 const seed=[{id:"spaghetti-carbonara",category:"Pasta",name:"Spaghetti Carbonara",price:"€14",image:"https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=900&q=80",description:"Guanciale, pecorino, uova e pepe nero.",descriptionEn:"Guanciale, pecorino cheese, eggs, and black pepper.",badge:"Chef's Choice",order:1},{id:"tagliatelle-al-tartufo",category:"Pasta",name:"Tagliatelle al Tartufo",price:"€19",image:"https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80",description:"Tagliatelle fresche con crema al tartufo.",descriptionEn:"Fresh tagliatelle with truffle cream.",badge:"Premium",order:2},{id:"risotto-ai-funghi",category:"Pasta",name:"Risotto ai Funghi",price:"€16",image:"https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=80",description:"Riso Carnaroli, funghi porcini e parmigiano.",descriptionEn:"Carnaroli rice, porcini mushrooms, and parmesan.",badge:"Vegetarian",order:3},{id:"pizza-margherita",category:"Pizza",name:"Pizza Margherita",price:"€12",image:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80",description:"Pomodoro, mozzarella e basilico fresco.",descriptionEn:"Tomato sauce, mozzarella, and fresh basil.",badge:"Classic",order:4},{id:"pizza-diavola",category:"Pizza",name:"Pizza Diavola",price:"€15",image:"https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=900&q=80",description:"Salame piccante, mozzarella e peperoncino.",descriptionEn:"Spicy salami, mozzarella, and chili flakes.",badge:"Spicy",order:5},{id:"quattro-formaggi",category:"Pizza",name:"Quattro Formaggi",price:"€17",image:"https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80",description:"Mozzarella, gorgonzola, fontina e parmigiano.",descriptionEn:"Mozzarella, gorgonzola, fontina, and parmesan.",badge:"Cheese Lover",order:6},{id:"tiramisu-della-casa",category:"Dolci",name:"Tiramisù della Casa",price:"€8",image:"https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=900&q=80",description:"Mascarpone, caffè e cacao.",descriptionEn:"Mascarpone, coffee, and cocoa.",badge:"Signature",order:7},{id:"panna-cotta",category:"Dolci",name:"Panna Cotta",price:"€7",image:"https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80",description:"Vaniglia con salsa ai frutti di bosco.",descriptionEn:"Vanilla panna cotta with berry sauce.",badge:"Light",order:8},{id:"gelato-artigianale",category:"Dolci",name:"Gelato Artigianale",price:"€6",image:"https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=80",description:"Selezione di gusti italiani.",descriptionEn:"Selection of Italian flavors.",badge:"Artisan",order:9}];
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),menuRef=collection(db,"menu");const $=id=>document.getElementById(id);const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));let categories=[],unsub=null;const isCategoryDoc=d=>d.data()?.type==="category";const categoryDocId=c=>"category_"+c.toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");try{await signOut(auth)}catch(_){}
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),menuRef=collection(db,"menu"),functions=getFunctions(app,"us-central1"),translateMenuItem=httpsCallable(functions,"translateMenuItem");const $=id=>document.getElementById(id);const esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));let categories=[],unsub=null;const isCategoryDoc=d=>d.data()?.type==="category";const categoryDocId=c=>"category_"+c.toLowerCase().trim().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"");try{await signOut(auth)}catch(_){}
 $('loginBtn').onclick=async()=>{ $('loginMsg').classList.add('hidden');try{await signInWithEmailAndPassword(auth,$('email').value.trim(),$('password').value)}catch(e){$('loginMsg').classList.remove('hidden');$('loginMsg').textContent=e.code==='auth/invalid-credential'?'Invalid email or password.':e.message}};$('logoutBtn').onclick=()=>signOut(auth);onAuthStateChanged(auth,user=>{$('loginCard').classList.toggle('hidden',!!user);$('app').classList.toggle('hidden',!user);if(user)start();else stop()});function stop(){if(unsub)unsub();unsub=null}
 function start(){unsub=onSnapshot(menuRef,snap=>{const all=snap.docs;categories=[...new Set([...all.filter(isCategoryDoc).map(d=>d.data().name||''),...all.filter(d=>!isCategoryDoc(d)).map(d=>d.data().category||'')].filter(Boolean))].sort((a,b)=>a.localeCompare(b));renderCategoryOptions();renderCategories(all);renderItems(all.filter(d=>!isCategoryDoc(d)))},e=>{$('items').innerHTML='<div class="msg">'+esc(e.message)+'</div>'})}
 function renderCategoryOptions(){const cur=$('newCategory').value;$('newCategory').innerHTML=categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(categories.includes(cur))$('newCategory').value=cur}
@@ -10,40 +10,29 @@ function fileToDataUrl(file,maxSide=1000,quality=.78){return new Promise((resolv
 const LANG_NAMES={it:"Italiano",en:"English",de:"Deutsch",es:"Español",pt:"Português",fr:"Français"};
 const TARGET_LANGS=["it","en","de","es","pt","fr"];
 function decodeHtml(s){const t=document.createElement("textarea");t.innerHTML=String(s??"");return t.value}
-async function translateText(text,from,to){
-  text=String(text??"").trim(); if(!text || from===to) return text;
-  const url=`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${encodeURIComponent(from)}%7C${encodeURIComponent(to)}`;
-  const r=await fetch(url); if(!r.ok) throw new Error(`Translation service returned ${r.status}.`);
-  const j=await r.json(); const out=decodeHtml(j?.responseData?.translatedText||"").trim();
-  if(!out) throw new Error("No translation was returned.");
-  return out;
-}
-function guessSource(name,description,descriptionEn){
-  if(descriptionEn && descriptionEn.trim() && description && description.trim()!==descriptionEn.trim()) return "it";
-  const s=`${name} ${description}`.toLowerCase();
-  if(/\b(al|alla|allo|agli|della|del|dei|degli|di|con|crema|caffè|caffe|cioccolato|tartufo|funghi|parmigiano|mozzarella|panna|burro|aglio|uova|pecorino|salame|pomodoro|basilico)\b/.test(s)) return "it";
-  return "en";
-}
 async function buildTranslations(x,sourceOverride){
+  const sourceLanguage=sourceOverride&&sourceOverride!=="auto"?sourceOverride:"it";
+  if(sourceLanguage!=="it") throw new Error("AI translation currently expects Italian source text. Choose Italiano or Auto-detect for Italian menu items.");
+  const result=await translateMenuItem({source:{
+    name:String(x.name||"").trim(),
+    description:String(x.description||"").trim(),
+    category:String(x.category||"").trim(),
+    badge:String(x.badge||"").trim()
+  }});
+  const generated=result?.data?.translations;
+  if(!generated) throw new Error("AI translation returned no translations.");
   const translations={...(x.translations||{})};
-  const fields={name:x.name||"",description:x.description||"",badge:x.badge||""};
-  const sourceFor=(text,field)=>{
-    if(sourceOverride&&sourceOverride!=="auto") return sourceOverride;
-    if(field==="description" && x.descriptionEn && x.description && x.description!==x.descriptionEn) return "it";
-    return guessSource(text,"","");
-  };
-  for(const target of TARGET_LANGS){
-    const t={...(translations[target]||{})};
-    if(fields.name){const s=sourceFor(fields.name,"name");t.name=await translateText(fields.name,s,target);}
-    if(fields.description){const s=sourceFor(fields.description,"description");t.description=await translateText(fields.description,s,target);}
-    if(fields.badge){const s=sourceFor(fields.badge,"badge");t.badge=await translateText(fields.badge,s,target);}
-    if(target==="en" && x.descriptionEn) t.description=x.descriptionEn;
-    translations[target]=t;
+  for(const lang of TARGET_LANGS){
+    const item=generated[lang]||{};
+    translations[lang]={
+      ...(translations[lang]||{}),
+      name:String(item.name||""),
+      description:String(item.description||""),
+      category:String(item.category||x.category||""),
+      badge:String(item.badge||"")
+    };
   }
-  // Preserve the source values exactly where they are already supplied.
-  const guessed=sourceOverride&&sourceOverride!=="auto"?sourceOverride:guessSource(x.name,x.description,x.descriptionEn);
-  if(guessed==="it") translations.it={...(translations.it||{}),name:x.name||"",description:x.description||"",badge:x.badge||""};
-  if(guessed==="en") translations.en={...(translations.en||{}),name:x.name||"",description:x.descriptionEn||x.description||"",badge:x.badge||""};
+  translations.it={...(translations.it||{}),name:String(x.name||""),description:String(x.description||""),category:String(x.category||""),badge:String(x.badge||"")};
   return translations;
 }
 function renderItems(docs){
