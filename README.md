@@ -34,6 +34,8 @@ Just scan this QR code with your phone camera to view the live Ristorante Rossin
 
 **[Open Ristorante Rossini Menu](https://ristorante-rossini.web.app/)**
 
+📥 **[QR Code পোস্টারটি ডাউনলোড করো](assets/qr-code-poster.svg)**
+
 </div>
 
 ## 🌍 Languages
