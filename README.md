@@ -4,11 +4,12 @@
 
 **A multilingual restaurant menu website powered by Firebase.**
 
-[🌐 Open Live Website](https://ristorante-rossini.web.app/) · [📦 View Repository](https://github.com/anabaid2000-collab/ristorante-rossini-menu)
+[🌐 Open Live Website](https://ristorante-rossini.web.app/) · [🔐 Admin Panel](https://ristorante-rossini.web.app/admin/) · [📦 View Repository](https://github.com/anabaid2000-collab/ristorante-rossini-menu)
 
 ![HTML](https://img.shields.io/badge/HTML-5-orange?logo=html5&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?logo=javascript&logoColor=black)
 ![Firebase](https://img.shields.io/badge/Firebase-Hosting-FFCA28?logo=firebase&logoColor=black)
+![GitHub Actions](https://img.shields.io/badge/Deploy-GitHub%20Actions-2088FF?logo=githubactions&logoColor=white)
 
 </div>
 
@@ -32,7 +33,7 @@ When people travel from one country to another, reading a restaurant menu in an 
 
 ## 🌍 Languages
 
-The project is intended to support six menu languages:
+The project supports six menu languages:
 
 - 🇮🇹 Italian
 - 🇬🇧 English
@@ -41,45 +42,67 @@ The project is intended to support six menu languages:
 - 🇵🇹 Portuguese
 - 🇫🇷 French
 
-Language translation and admin features depend on the corresponding Firebase configuration and deployed functions being set up correctly.
-
 ## 🧰 Built With
 
 - **HTML, CSS and JavaScript** — website interface and behaviour
 - **Firebase Hosting** — live website hosting
 - **Cloud Firestore and Firebase Security Rules** — menu data and access control
 - **Firebase Cloud Functions** — server-side functionality, where configured
+- **GitHub Actions** — automated deployment to Firebase Hosting
 
 ## 🚀 Live Demo
 
-Visit the website: **https://ristorante-rossini.web.app/**
+- **Website:** https://ristorante-rossini.web.app/
+- **Admin Panel:** https://ristorante-rossini.web.app/admin/
 
-## 🛠️ Deployment
+## 🚀 Deployment Guide
 
-Deploy the website files to Firebase Hosting from the configured project directory:
+The website is hosted on Firebase Hosting. The GitHub Actions workflow automatically deploys the site when changes are pushed to the `main` branch.
+
+### Automatic Deployment (Recommended)
+
+1. Make and save your changes to the project files.
+2. Commit and push the changes to the `main` branch.
+3. Open [GitHub Actions](https://github.com/anabaid2000-collab/ristorante-rossini-menu/actions).
+4. Open the latest **Deploy Firebase Hosting** workflow run.
+5. Wait until its status shows **Success**.
+6. Visit the [live website](https://ristorante-rossini.web.app/) and refresh the page to verify the changes.
+
+### Manual Deployment Using Firebase CLI
+
+If you need to deploy manually, open Google Cloud Shell or a terminal where Firebase CLI is installed and run:
 
 ```bash
+cd ~/ristorante-rossini-menu
+git pull origin main
+firebase use ristorante-rossini
 firebase deploy --only hosting
 ```
 
-If you are updating configured Cloud Functions or Firestore rules as well, use the appropriate deployment targets, for example:
+If the project directory is not at `~/ristorante-rossini-menu`, first change to the directory where you cloned the repository.
 
-```bash
-firebase deploy --only hosting,functions,firestore:rules
-```
+After deployment, Firebase CLI will show the deployment result and hosting URL.
 
-Run the second command only after confirming the Functions and Firestore configuration is ready.
+### Deployment Requirements
+
+- Access to the GitHub repository
+- The GitHub Actions workflow enabled
+- The repository secret `FIREBASE_SERVICE_ACCOUNT_RISTORANTE_ROSSINI` configured for automated deployment
+- Firebase CLI installed and authenticated for manual deployment
 
 ## 🔐 Security Notes
 
-- Never commit API keys, passwords, service-account files, or other secrets.
-- Keep AI provider keys in Firebase Secret Manager or another appropriate server-side secret store.
-- Review Firestore rules before deploying changes.
-- Do not remove the existing authenticated admin account when maintaining the Admin Panel.
+- Never commit API keys, passwords, service-account JSON files, or other secrets to the repository.
+- Keep the Firebase service-account credential in GitHub Actions secrets; never paste its contents into source files or README.
+- Review Firestore rules before deploying changes to them.
+- Preserve the existing Firebase Authentication and admin configuration when maintaining the Admin Panel.
 
 ## 📁 Repository
 
-The default branch is `main`. The live site is hosted separately on Firebase Hosting; committing to GitHub does not by itself deploy the site unless a deployment workflow is configured.
+The default branch is `main`. The live website is hosted on Firebase Hosting, and the GitHub Actions workflow deploys changes pushed to `main`.
+
+- **Source code:** [GitHub Repository](https://github.com/anabaid2000-collab/ristorante-rossini-menu)
+- **Deployment history:** [GitHub Actions](https://github.com/anabaid2000-collab/ristorante-rossini-menu/actions)
 
 ## 👩‍💻 Maintainer
 
