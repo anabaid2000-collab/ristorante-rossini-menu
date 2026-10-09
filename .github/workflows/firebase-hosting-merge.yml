@@ -30,4 +30,5 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_RISTORANTE_ROSSINI }}
           projectId: ristorante-rossini
+          firebaseToolsVersion: 14.22.0
           channelId: live
