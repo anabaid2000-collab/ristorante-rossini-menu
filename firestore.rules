@@ -20,7 +20,7 @@ service cloud.firestore {
         ])
         && request.resource.data.keys().hasOnly([
           'dishId', 'dishName', 'category', 'price', 'quantity',
-          'tableNumber', 'language', 'status', 'createdAt'
+          'tableNumber', 'language', 'status', 'customerToken', 'createdAt'
         ])
         && request.resource.data.dishId is string
         && request.resource.data.dishId.size() > 0
@@ -39,10 +39,18 @@ service cloud.firestore {
         && request.resource.data.tableNumber <= 100
         && request.resource.data.language in ['it', 'en', 'de', 'es', 'pt', 'fr']
         && request.resource.data.status == 'pending'
+        && (!request.resource.data.keys().hasAny(['customerToken']) || (
+          request.resource.data.customerToken is string
+          && request.resource.data.customerToken.size() == 32
+          && request.resource.data.customerToken == orderId
+        ))
         && request.resource.data.createdAt == request.time;
 
       // Only the authenticated restaurant administrator can see and manage orders.
-      allow read: if isMenuAdmin();
+      // Customers may read only their own order document using its unguessable 128-bit token ID.
+      // Collection listing remains restricted to the authenticated administrator.
+      allow get: if isMenuAdmin() || (request.auth == null && resource.data.customerToken == orderId);
+      allow list: if isMenuAdmin();
       allow update: if isMenuAdmin()
         && request.resource.data.diff(resource.data).affectedKeys()
           .hasOnly(['status', 'updatedAt'])
