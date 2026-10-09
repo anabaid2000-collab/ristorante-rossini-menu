@@ -20,7 +20,7 @@ service cloud.firestore {
         ])
         && request.resource.data.keys().hasOnly([
           'dishId', 'dishName', 'category', 'price', 'quantity',
-          'tableNumber', 'language', 'status', 'createdAt'
+          'tableNumber', 'language', 'status', 'customerToken', 'createdAt'
         ])
         && request.resource.data.dishId is string
         && request.resource.data.dishId.size() > 0
