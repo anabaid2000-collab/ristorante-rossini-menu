@@ -20,23 +20,7 @@ When people travel from one country to another, reading a restaurant menu in an 
 
 **I created Ristorante Rossini Menu to make this experience easier.** Visitors can select their preferred language and explore the restaurant menu in a language they understand, making it easier to discover dishes and place orders—even if they don't speak the local language.
 
-Guests can also simply scan the QR code in this README using their phone's camera to access and view the menu directly.
-
 **My goal** is to make restaurant dining more welcoming, accessible, and convenient for international guests.
-
-## 📱 Scan to Visit the Website
-
-Just scan this QR code with your phone camera to view the live Ristorante Rossini menu.
-
-<div align="center">
-
-[![Ristorante Rossini website QR code](https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=12&data=https%3A%2F%2Fristorante-rossini.web.app%2F)](https://ristorante-rossini.web.app/)
-
-**[Open Ristorante Rossini Menu](https://ristorante-rossini.web.app/)**
-
-📥 **[QR Code পোস্টারটি ডাউনলোড করো](assets/qr-code-poster.svg)**
-
-</div>
 
 ## 🌍 Languages
 
