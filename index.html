@@ -50,6 +50,61 @@ footer{background:#f0e7d9;border-top-color:#d9c6ac}
 @media(max-width:800px){header{height:78px}.nav{gap:8px}.hero{padding-top:48px;padding-bottom:56px;gap:35px}.hero-image{box-shadow:0 16px 36px rgba(49,23,25,.14)}.menu-section{padding-top:58px;padding-bottom:62px}}
 @media(max-width:520px){header{height:72px}.brand-name{font-size:18px}.nav .admin-nav{padding:8px 9px;font-size:9px}.language{max-width:104px;font-size:11px}.image-caption{padding:13px 16px}.dish-body{padding:18px}.story{padding:48px 0}}
 
+/* Editorial Luxury Italian redesign: new hero composition + refined menu layout */
+:root{--cream:#f4ecdf;--paper:#fffaf1;--wine:#702238;--wine2:#3c101d;--gold:#c5a36a;--ink:#28201e;--muted:#796b60;--line:#ddcbb4;--shadow:0 22px 65px rgba(33,10,18,.15)}
+header.wrap{width:100%;padding:0 max(4%,calc((100% - 1160px)/2));background:#fbf7ef}
+.hero{width:100%;background:var(--wine2);color:#fff7ea;padding:48px 0 58px;overflow:hidden;position:relative}
+.hero:before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 12% 15%,rgba(197,163,106,.16),transparent 36%),linear-gradient(110deg,#3c101d 0%,#511729 58%,#32101a 100%)}
+.hero-inner{position:relative;display:grid;grid-template-columns:.88fr 1fr;gap:72px;align-items:center}
+.hero-copy{padding:28px 0 25px}
+.hero .eyebrow{color:var(--gold)}
+.hero h1{font-size:clamp(48px,6vw,82px);line-height:1.02;color:#fff8ed;letter-spacing:-.045em;margin:26px 0}
+.hero h1 em{color:#d6b77d}
+.hero .intro{color:#e4d6c9;font-size:14px;max-width:410px}
+.hero .btn{background:var(--gold);border-color:var(--gold);color:#2c1418;box-shadow:none}
+.hero .btn:hover{background:#d6b77d}
+.hero .btn.secondary{background:transparent;border-color:#b99761;color:#fff6e8}
+.hero .hero-note{color:#d4bd9a;font-size:10px;letter-spacing:.16em}
+.hero-signature{margin-top:40px;padding-top:17px;border-top:1px solid #ffffff2b;color:#d5bd98;font-size:9px;letter-spacing:.24em}
+.hero-signature span{color:#fff8ed;margin:0 8px}
+.hero-image{height:530px;box-shadow:0 25px 65px #17070c66;background:#5c4336}
+.hero-image:after{inset:13px;border:1px solid #e8d4ad9c}
+.image-caption{left:-32px;bottom:32px;background:#fffaf1;border-left:3px solid var(--gold);padding:19px 24px}
+.image-caption strong{font-size:21px}
+.image-number{position:absolute;right:28px;top:28px;color:#fff7ea;font:500 12px 'DM Sans',sans-serif;letter-spacing:.12em;text-shadow:0 1px 8px #0008}
+.image-number span{color:#f2d7a8}
+.divider{border-color:#cbb99f}
+.menu-section{padding-top:90px;padding-bottom:100px}
+.section-head{text-align:left;margin:0 0 30px;max-width:690px}
+.section-head .eyebrow{justify-content:flex-start}
+.section-head .eyebrow:before{display:block}
+.section-head h2{font-size:clamp(40px,4.5vw,58px);color:var(--wine2)}
+.section-head p{max-width:470px}
+.filters{justify-content:flex-start;border-bottom:1px solid var(--line);padding-bottom:18px;margin:30px 0}
+.filter{border:0;border-bottom:2px solid transparent;background:transparent;padding:10px 15px;color:#796b60}
+.filter.active,.filter:hover{background:transparent;color:var(--wine);border-color:var(--gold)}
+.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.dish{display:grid;grid-template-columns:42% 1fr;align-items:stretch;background:#fffaf2;border:1px solid #e2d2bd;box-shadow:none}
+.dish:hover{transform:translateY(-2px);border-color:#c5a36a;box-shadow:0 16px 36px #38152212}
+.dish-img{height:100%;min-height:210px}
+.dish-body{align-self:center;padding:24px 22px}
+.dish h3{font-size:23px}
+.price{font-size:18px;color:var(--wine)}
+.badge{background:var(--wine2);color:#fff5e6;letter-spacing:.12em}
+.story{padding:86px 0;background:linear-gradient(120deg,#3c101d,#5b1b30 60%,#35101b);border-block:1px solid var(--gold)}
+.story-inner{grid-template-columns:.8fr 1.2fr;gap:90px}
+.story-mark{font-size:112px;color:var(--gold);border:1px solid #b9976155;width:145px;height:145px;display:grid;place-items:center;border-radius:50%}
+.story h2{font-size:clamp(36px,4vw,52px)}
+.visit{padding:86px 0}
+.visit h2{font-size:clamp(38px,4vw,54px);color:var(--wine2)}
+footer{background:#eee3d3;border-color:#d8c3a6}
+@media(max-width:800px){
+ .hero{padding:28px 0 42px}.hero-inner{grid-template-columns:1fr;gap:30px}.hero-copy{padding:12px 0 0}.hero-image{height:390px;margin-left:18px}.image-caption{left:-18px}.hero-signature{margin-top:25px}
+ .menu-grid{grid-template-columns:1fr}.story-inner{grid-template-columns:1fr;gap:28px}.story-mark{width:100px;height:100px;font-size:70px}.section-head{text-align:center}.section-head .eyebrow{justify-content:center}.section-head .eyebrow:before{display:none}.filters{justify-content:center}
+}
+@media(max-width:520px){
+ header.wrap{padding:0 4%}.hero h1{font-size:52px}.hero-image{height:320px}.menu-section{padding:55px 0 62px}.dish{grid-template-columns:1fr}.dish-img{height:225px;min-height:0}.dish-body{padding:20px}.story{padding:55px 0}.story-inner{gap:18px}.visit{padding:58px 0}
+}
 </style>
 </head>
 <body>
@@ -58,8 +113,7 @@ footer{background:#f0e7d9;border-top-color:#d9c6ac}
 <nav class="nav"><a href="#menu" data-i18n="navMenu">Menu</a><a href="#story" data-i18n="navStory">La nostra storia</a><a href="#visit" data-i18n="navVisit">Contatti</a><a href="/admin/" class="admin-nav" data-i18n="admin">Admin</a><select id="language" class="language" aria-label="Choose language"><option value="it">🇮🇹 Italiano</option><option value="en">🇬🇧 English</option><option value="de">🇩🇪 Deutsch</option><option value="es">🇪🇸 Español</option><option value="pt">🇵🇹 Português</option><option value="fr">🇫🇷 Français</option></select></nav>
 </header>
 <main>
-<section class="hero wrap"><div><div class="eyebrow" data-i18n="eyebrow">Autentica cucina italiana</div><h1 data-i18n="heroTitle">Il gusto della<br><em>bella vita.</em></h1><p class="intro" data-i18n="heroText">Ingredienti scelti, ricette senza tempo e il piacere di condividere la tavola. Benvenuti da Rossini.</p><div class="hero-actions"><a class="btn" href="#menu" data-i18n="explore">Scopri il menu</a><a class="btn secondary" href="#story" data-i18n="ourStory">La nostra storia</a></div><div class="hero-note" data-i18n="heroNote">FATTO CON CURA · SERVITO CON PASSIONE</div></div>
-<div class="hero-image"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85" alt="Elegante tavola italiana apparecchiata"><div class="image-caption"><span data-i18n="captionTop">Un'esperienza da ricordare</span><strong data-i18n="captionBottom">Semplice. Raffinata. Italiana.</strong></div></div></section>
+<section class="hero"><div class="hero-inner wrap"><div class="hero-copy"><div class="eyebrow" data-i18n="eyebrow">Autentica cucina italiana</div><h1 data-i18n="heroTitle">Il gusto della<br><em>bella vita.</em></h1><p class="intro" data-i18n="heroText">Ingredienti scelti, ricette senza tempo e il piacere di condividere la tavola. Benvenuti da Rossini.</p><div class="hero-actions"><a class="btn" href="#menu" data-i18n="explore">Scopri il menu</a><a class="btn secondary" href="#story" data-i18n="ourStory">La nostra storia</a></div><div class="hero-note" data-i18n="heroNote">FATTO CON CURA · SERVITO CON PASSIONE</div><div class="hero-signature">ROSSINI <span>·</span> CUCINA ITALIANA</div></div><div class="hero-image"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85" alt="Elegante tavola italiana apparecchiata"><div class="image-caption"><span data-i18n="captionTop">Un'esperienza da ricordare</span><strong data-i18n="captionBottom">Semplice. Raffinata. Italiana.</strong></div><div class="image-number">01 <span>— 06</span></div></div></div></section>
 <hr class="divider wrap">
 <section id="menu" class="menu-section wrap"><div class="section-head"><div class="eyebrow" data-i18n="menuEyebrow">La selezione dello chef</div><h2 data-i18n="menuTitle">Il nostro menu</h2><p data-i18n="menuText">Classici italiani preparati con ingredienti di qualità e un tocco contemporaneo.</p></div><div id="filters" class="filters"><button class="filter active" data-category="all" data-i18n="all">Tutto</button></div><div id="menuGrid" class="menu-grid"><div class="loading" data-i18n="loading">Prepariamo la tavola…</div></div></section>
 <section id="story" class="story"><div class="story-inner wrap"><div><div class="eyebrow" data-i18n="storyEyebrow">La filosofia Rossini</div><div class="story-mark">R.</div></div><div><h2 data-i18n="storyTitle">Il piacere delle cose fatte bene.</h2><p data-i18n="storyText">Crediamo nella bellezza della semplicità: ingredienti autentici, sapori generosi e un'accoglienza che fa sentire ogni ospite a casa. Ogni piatto racconta un piccolo viaggio nel cuore d'Italia.</p></div></div></section>
