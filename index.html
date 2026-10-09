@@ -432,6 +432,17 @@ footer{background:#eee3d2;border-color:#ddc9ae;color:#76695c}
 .filter-group-options .filter{min-height:38px;padding:9px 15px;border-radius:2px}
 .category-filter-group .filter-group-options{gap:7px}
 @media(max-width:520px){#filters.filters{gap:15px!important;margin:22px 0 26px!important}.filter-group-options{gap:6px}.filter-group-options .filter{padding:9px 12px;font-size:10px}}
+
+/* Header navigation: remove hamburger visually and present links as buttons */
+.site-header{gap:18px}
+.site-header .menu-toggle{display:none!important}
+.nav{gap:10px!important;flex-wrap:wrap;justify-content:flex-end}
+.nav>a:not(.admin-nav){display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:10px 14px;border:1px solid #d9c6a8;border-radius:3px;background:#fffaf2;color:var(--wine);font-weight:700;letter-spacing:.05em;transition:background .2s,color .2s,border-color .2s}
+.nav>a:not(.admin-nav):hover,.nav>a:not(.admin-nav):focus-visible{background:var(--wine);border-color:var(--wine);color:#fff8ed}
+.nav .admin-nav{min-height:40px;padding:10px 14px;border-radius:3px}
+.nav .notification-bell{width:42px;height:40px;border-radius:3px}
+.nav .language{min-height:40px}
+@media(max-width:760px){.site-header{align-items:flex-start;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}.nav{width:100%;margin-left:0;justify-content:flex-start;gap:8px!important}.nav>a:not(.admin-nav){padding:9px 11px;min-height:38px}.nav .language{max-width:125px}.brand-name{font-size:20px}.brand-sub{letter-spacing:.14em}}
 </style></head>
 <body>
 <header class="wrap site-header">
