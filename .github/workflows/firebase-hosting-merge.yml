@@ -1,18 +1,6 @@
-name: Deploy Firebase Hosting
+name: Deploy Firebase Hosting (legacy manual only)
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'index.html'
-      - 'admin/**'
-      - 'admin-index.html'
-      - 'firebase.json'
-      - 'firestore.rules'
-      - '404.html'
-      - 'assets/**'
-      - '.github/workflows/firebase-hosting-merge.yml'
   workflow_dispatch:
 
 permissions:
