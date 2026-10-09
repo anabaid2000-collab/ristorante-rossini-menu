@@ -1,11 +1,53 @@
-
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    function isMenuAdmin() {
+      return request.auth != null
+        && request.auth.uid == "X9dMH5dbdNMrZuaeHiz3p8f88UC3";
+    }
+
     match /menu/{itemId} {
       allow read: if true;
-      allow create, update, delete: if request.auth != null
-        && request.auth.uid == "X9dMH5dbdNMrZuaeHiz3p8f88UC3";
+      allow create, update, delete: if isMenuAdmin();
+    }
+
+    match /orders/{orderId} {
+      // Customers can submit a new, pending order, but cannot read or change orders.
+      allow create: if
+        request.resource.data.keys().hasAll([
+          'dishId', 'dishName', 'category', 'price', 'quantity',
+          'tableNumber', 'language', 'status', 'createdAt'
+        ])
+        && request.resource.data.keys().hasOnly([
+          'dishId', 'dishName', 'category', 'price', 'quantity',
+          'tableNumber', 'language', 'status', 'createdAt'
+        ])
+        && request.resource.data.dishId is string
+        && request.resource.data.dishId.size() > 0
+        && request.resource.data.dishName is string
+        && request.resource.data.dishName.size() > 0
+        && request.resource.data.dishName.size() <= 120
+        && request.resource.data.category is string
+        && request.resource.data.category.size() <= 80
+        && request.resource.data.price is string
+        && request.resource.data.price.size() <= 30
+        && request.resource.data.quantity is int
+        && request.resource.data.quantity >= 1
+        && request.resource.data.quantity <= 20
+        && request.resource.data.tableNumber is int
+        && request.resource.data.tableNumber >= 1
+        && request.resource.data.tableNumber <= 100
+        && request.resource.data.language in ['it', 'en', 'de', 'es', 'pt', 'fr']
+        && request.resource.data.status == 'pending'
+        && request.resource.data.createdAt == request.time;
+
+      // Only the authenticated restaurant administrator can see and manage orders.
+      allow read: if isMenuAdmin();
+      allow update: if isMenuAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['status', 'updatedAt'])
+        && request.resource.data.status in ['pending', 'preparing', 'ready', 'completed'];
+      allow delete: if isMenuAdmin();
     }
   }
 }
