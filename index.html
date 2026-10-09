@@ -495,9 +495,20 @@ footer{background:#eee3d2;border-color:#ddc9ae;color:#76695c}
   </section>
 </div>
 <footer><div class="footer-inner wrap"><span>© <span id="year"></span> RISTORANTE ROSSINI · CUCINA ITALIANA</span><span data-i18n="footer">Preparato con cura, da condividere con piacere.</span><a class="admin-link" href="/admin/" data-i18n="admin">Admin</a></div></footer>
+<script>
+/* Fallback for browsers where Firebase module imports fail before the app starts. */
+window.__rossiniMenuBooted = false;
+window.setTimeout(function () {
+  if (window.__rossiniMenuBooted) return;
+  var grid = document.getElementById('menuGrid');
+  if (!grid) return;
+  grid.innerHTML = '<div class="empty" role="status"><p>The menu app could not start. Please check your internet connection and reload this page.</p><button type="button" class="filter active" onclick="window.location.reload()">Reload menu</button></div>';
+}, 15000);
+</script>
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
 import {getFirestore,collection,doc,onSnapshot,setDoc,serverTimestamp} from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js';
+window.__rossiniMenuBooted = true;
 const firebaseConfig={apiKey:'AIzaSyCvLtUCpKWhVeMh7QcbrlJZpvtAPAIplXo',authDomain:'ristorante-rossini.firebaseapp.com',projectId:'ristorante-rossini',storageBucket:'ristorante-rossini.firebasestorage.app',appId:'1:886098533105:web:6528ce9772520d02b4e750'};
 const app=initializeApp(firebaseConfig),db=getFirestore(app);
 const $=id=>document.getElementById(id);
