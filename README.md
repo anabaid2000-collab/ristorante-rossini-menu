@@ -16,13 +16,13 @@
 
 ## ✨ About the Project
 
-When I travel from one country to another, reading a restaurant menu in an unfamiliar language can be challenging. It can be difficult to understand the available dishes and place an order with confidence.
+When people travel from one country to another, reading a restaurant menu in an unfamiliar language can be challenging. Understanding the available dishes and placing an order with confidence can become difficult.
 
-**I created Ristorante Rossini Menu to make that experience easier.** Visitors can select their preferred language and read the restaurant menu in a language they understand, helping them explore dishes and place orders more comfortably—even when they do not speak the local language.
+**I created Ristorante Rossini Menu to make this experience easier.** Visitors can select their preferred language and explore the restaurant menu in a language they understand, making it easier to discover dishes and place orders—even if they don't speak the local language.
 
-Guests can also scan the QR code in this README with their phone camera to open and view the menu directly.
+Guests can also simply scan the QR code in this README using their phone's camera to access and view the menu directly.
 
-My goal is to make restaurant dining more welcoming, accessible, and convenient for international guests.
+**My goal** is to make restaurant dining more welcoming, accessible, and convenient for international guests.
 
 ## 📱 Scan to Visit the Website
 
