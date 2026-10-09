@@ -559,12 +559,15 @@ const orderDiff=Number(a.order??999)-Number(b.order??999);
 if(orderDiff!==0)return orderDiff;
 return textFor(a,'name').localeCompare(textFor(b,'name'),currentLang,{sensitivity:'base'});
 }).filter(item=>{
+// Remove only true visible-name duplicates within the same category.
+// Do not compare translated aliases: one item's translation can match another item's
+// name in a different language and accidentally hide legitimate dishes.
 const category=normalizeMenuText(item.category);
 if(!seenByCategory.has(category))seenByCategory.set(category,new Set());
 const categorySeen=seenByCategory.get(category);
-const aliases=menuNameAliases(item);
-if(aliases.some(name=>categorySeen.has(name)))return false;
-aliases.forEach(name=>categorySeen.add(name));
+const visibleName=normalizeMenuText(textFor(item,'name'));
+if(visibleName && categorySeen.has(visibleName))return false;
+if(visibleName)categorySeen.add(visibleName);
 return true;
 });
 if(!items.length){const msg=activeAvailability==='unavailable'?({it:'Al momento non ci sono piatti non disponibili.',en:'There are no unavailable dishes right now.',de:'Zurzeit gibt es keine nicht verfügbaren Gerichte.',es:'No hay platos no disponibles en este momento.',pt:'Não há pratos indisponíveis neste momento.',fr:'Aucun plat indisponible pour le moment.'}[currentLang]||'No unavailable dishes right now.'):activeAvailability==='available'?({it:'Al momento non ci sono piatti disponibili.',en:'There are no available dishes right now.',de:'Zurzeit gibt es keine verfügbaren Gerichte.',es:'No hay platos disponibles en este momento.',pt:'Não há pratos disponíveis neste momento.',fr:'Aucun plat disponible pour le moment.'}[currentLang]||'No available dishes right now.'):(currentLang==='it'?'Il menu sarà disponibile a breve.':'The menu will be available soon.');$('menuGrid').innerHTML='<div class="empty">'+escapeHtml(msg)+'</div>';return}
