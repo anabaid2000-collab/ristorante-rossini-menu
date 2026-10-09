@@ -9,6 +9,7 @@ on:
       - 'admin/**'
       - 'admin-index.html'
       - 'firebase.json'
+      - 'firestore.rules'
       - '404.html'
       - 'assets/**'
       - '.github/workflows/firebase-hosting-merge.yml'
@@ -23,6 +24,22 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Set up Node.js for Firebase CLI
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Firebase CLI
+        run: npm install --global firebase-tools@14.22.0
+
+      - name: Deploy Firestore Security Rules
+        env:
+          FIREBASE_SERVICE_ACCOUNT_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_RISTORANTE_ROSSINI }}
+        run: |
+          printf '%s' "$FIREBASE_SERVICE_ACCOUNT_JSON" > "$RUNNER_TEMP/firebase-service-account.json"
+          export GOOGLE_APPLICATION_CREDENTIALS="$RUNNER_TEMP/firebase-service-account.json"
+          firebase deploy --only firestore:rules --project ristorante-rossini
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
