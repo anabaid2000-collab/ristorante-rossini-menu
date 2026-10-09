@@ -16,7 +16,7 @@ service cloud.firestore {
       allow create: if
         request.resource.data.keys().hasAll([
           'dishId', 'dishName', 'category', 'price', 'quantity',
-          'tableNumber', 'language', 'status', 'customerToken', 'createdAt'
+          'tableNumber', 'language', 'status', 'createdAt'
         ])
         && request.resource.data.keys().hasOnly([
           'dishId', 'dishName', 'category', 'price', 'quantity',
@@ -39,9 +39,11 @@ service cloud.firestore {
         && request.resource.data.tableNumber <= 100
         && request.resource.data.language in ['it', 'en', 'de', 'es', 'pt', 'fr']
         && request.resource.data.status == 'pending'
-        && request.resource.data.customerToken is string
-        && request.resource.data.customerToken.size() == 32
-        && request.resource.data.customerToken == orderId
+        && (!request.resource.data.keys().hasAny(['customerToken']) || (
+          request.resource.data.customerToken is string
+          && request.resource.data.customerToken.size() == 32
+          && request.resource.data.customerToken == orderId
+        ))
         && request.resource.data.createdAt == request.time;
 
       // Only the authenticated restaurant administrator can see and manage orders.
