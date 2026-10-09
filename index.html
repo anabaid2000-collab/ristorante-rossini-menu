@@ -244,6 +244,35 @@ footer{background:#0b0b0a;border-color:#3b342b;color:#a99e8e}.admin-link:hover{c
   .image-caption strong{font-size:15px}
 }
 
+
+
+/* Accessible dish detail lightbox */
+.dish{cursor:pointer}
+.dish:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.dish-detail-overlay{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(22,9,14,.78);backdrop-filter:blur(5px)}
+.dish-detail-overlay.is-open{display:flex}
+.dish-detail-dialog{position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);width:min(980px,100%);max-height:min(86vh,820px);overflow:auto;background:var(--paper);box-shadow:0 28px 90px rgba(0,0,0,.35);border:1px solid #c5a36a}
+.dish-detail-image{width:100%;height:100%;min-height:420px;max-height:780px;object-fit:cover;display:block;background:#e6d9c9}
+.dish-detail-content{padding:clamp(26px,4vw,52px);display:flex;flex-direction:column;justify-content:center;min-width:0}
+.dish-detail-category{color:var(--gold);font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+.dish-detail-title{font:500 clamp(30px,4vw,46px)/1.12 'Playfair Display',serif;color:var(--wine2);margin:0 38px 16px 0;overflow-wrap:anywhere}
+.dish-detail-price{font:700 clamp(24px,3vw,32px)/1.2 'DM Sans',sans-serif;color:var(--wine);margin-bottom:22px;font-variant-numeric:lining-nums tabular-nums}
+.dish-detail-description{font-size:15px;line-height:1.9;color:var(--muted);white-space:pre-line}
+.dish-detail-badge{align-self:flex-start;margin-top:22px;background:var(--wine2);color:#fff5e6;padding:8px 11px;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.dish-detail-close{position:absolute;top:12px;right:12px;z-index:2;width:42px;height:42px;border:1px solid #ddcbb4;background:#fffaf1;color:var(--wine2);font:400 27px/1 'DM Sans',sans-serif;cursor:pointer;display:grid;place-items:center}
+.dish-detail-close:hover{background:var(--wine2);color:#fffaf1}
+body.dish-detail-open{overflow:hidden}
+@media(max-width:700px){
+ .dish-detail-overlay{padding:12px;align-items:center}
+ .dish-detail-dialog{grid-template-columns:minmax(0,1fr);width:min(520px,100%);max-height:90vh}
+ .dish-detail-image{height:clamp(210px,42vh,340px);min-height:0;max-height:none}
+ .dish-detail-content{padding:24px 22px 28px}
+ .dish-detail-title{font-size:32px;margin-right:38px}
+ .dish-detail-price{font-size:25px;margin-bottom:13px}
+ .dish-detail-description{font-size:14px;line-height:1.75}
+ .dish-detail-close{top:10px;right:10px;width:40px;height:40px}
+}
+
 </style>
 </head>
 <body>
@@ -258,6 +287,19 @@ footer{background:#0b0b0a;border-color:#3b342b;color:#a99e8e}.admin-link:hover{c
 <section id="story" class="story"><div class="story-inner wrap"><div><div class="eyebrow" data-i18n="storyEyebrow">La filosofia Rossini</div><div class="story-mark">R.</div></div><div><h2 data-i18n="storyTitle">Il piacere delle cose fatte bene.</h2><p data-i18n="storyText">Crediamo nella bellezza della semplicità: ingredienti autentici, sapori generosi e un'accoglienza che fa sentire ogni ospite a casa. Ogni piatto racconta un piccolo viaggio nel cuore d'Italia.</p></div></div></section>
 <section id="visit" class="visit wrap"><div class="eyebrow" style="justify-content:center" data-i18n="visitEyebrow">Saremo felici di accogliervi</div><h2 data-i18n="visitTitle">A tavola, insieme.</h2><p data-i18n="visitText">Per informazioni sul menu e sulle visite, contattate direttamente il ristorante.</p><a class="btn" href="#menu" data-i18n="contact">Contattaci</a></section>
 </main>
+<div id="dishDetailOverlay" class="dish-detail-overlay" aria-hidden="true">
+  <section class="dish-detail-dialog" role="dialog" aria-modal="true" aria-labelledby="dishDetailTitle">
+    <button type="button" id="dishDetailClose" class="dish-detail-close" aria-label="Close details">×</button>
+    <img id="dishDetailImage" class="dish-detail-image" src="" alt="">
+    <div class="dish-detail-content">
+      <div id="dishDetailCategory" class="dish-detail-category"></div>
+      <h2 id="dishDetailTitle" class="dish-detail-title"></h2>
+      <div id="dishDetailPrice" class="dish-detail-price"></div>
+      <p id="dishDetailDescription" class="dish-detail-description"></p>
+      <span id="dishDetailBadge" class="dish-detail-badge" hidden></span>
+    </div>
+  </section>
+</div>
 <footer><div class="footer-inner wrap"><span>© <span id="year"></span> RISTORANTE ROSSINI · CUCINA ITALIANA</span><span data-i18n="footer">Preparato con cura, da condividere con piacere.</span><a class="admin-link" href="/admin/" data-i18n="admin">Admin</a></div></footer>
 <script type="module">
 import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
@@ -279,8 +321,11 @@ function textFor(item,key){const tr=item.translations?.[currentLang]||{};if(tr[k
 function categoryName(c){const d=allItems.find(x=>x.type==='category'&&x.name===c);return d?.translations?.[currentLang]?.name||c}
 function applyLanguage(){document.documentElement.lang=currentLang;const d=langs[currentLang]||langs.it;document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(d[k])el.innerHTML=d[k]});renderFilters();renderMenu()}
 function renderFilters(){const cats=[...new Set(allItems.filter(x=>x.type!=='category').map(x=>x.category).filter(Boolean))];const labels=[{key:'all',name:(langs[currentLang]||langs.it).all}];$('filters').innerHTML='<button class="filter '+(activeCategory==='all'?'active':'')+'" data-category="all">'+escapeHtml(labels[0].name)+'</button>'+cats.map(c=>'<button class="filter '+(activeCategory===c?'active':'')+'" data-category="'+escapeHtml(c)+'">'+escapeHtml(categoryName(c))+'</button>').join('');$('filters').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{activeCategory=b.dataset.category;renderFilters();renderMenu()}))}
+function openDishDetail(id){const item=allItems.find(x=>x.id===id);if(!item)return;const name=textFor(item,'name'),desc=textFor(item,'description'),badge=textFor(item,'badge'),image=item.image||'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=85';$('dishDetailImage').src=image;$('dishDetailImage').alt=name;$('dishDetailTitle').textContent=name;$('dishDetailPrice').textContent=item.price||'';$('dishDetailDescription').textContent=desc;$('dishDetailCategory').textContent=categoryName(item.category||'');$('dishDetailBadge').textContent=badge;$('dishDetailBadge').hidden=!badge;$('dishDetailOverlay').classList.add('is-open');$('dishDetailOverlay').setAttribute('aria-hidden','false');document.body.classList.add('dish-detail-open');$('dishDetailClose').focus()}
+function closeDishDetail(){$('dishDetailOverlay').classList.remove('is-open');$('dishDetailOverlay').setAttribute('aria-hidden','true');document.body.classList.remove('dish-detail-open')}
+$('dishDetailClose').addEventListener('click',closeDishDetail);$('dishDetailOverlay').addEventListener('click',e=>{if(e.target===$('dishDetailOverlay'))closeDishDetail()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeDishDetail()});
 function renderMenu(){const items=allItems.filter(x=>x.type!=='category'&&(activeCategory==='all'||x.category===activeCategory)).sort((a,b)=>(a.order??999)-(b.order??999));if(!items.length){$('menuGrid').innerHTML='<div class="empty">'+escapeHtml(currentLang==='it'?'Il menu sarà disponibile a breve.':'The menu will be available soon.')+'</div>';return}
-$('menuGrid').innerHTML=items.map(x=>{const name=textFor(x,'name'),desc=textFor(x,'description'),badge=textFor(x,'badge');return '<article class="dish"><div class="dish-img"><img loading="lazy" src="'+escapeHtml(x.image||'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=80')+'" alt="'+escapeHtml(name)+'">'+(badge?'<span class="badge">'+escapeHtml(badge)+'</span>':'')+'</div><div class="dish-body"><div class="dish-top"><h3>'+escapeHtml(name)+'</h3><span class="price">'+escapeHtml(x.price||'')+'</span></div><p>'+escapeHtml(desc)+'</p></div></article>'}).join('')}
+$('menuGrid').innerHTML=items.map(x=>{const name=textFor(x,'name'),desc=textFor(x,'description'),badge=textFor(x,'badge');return '<article class="dish" tabindex="0" role="button" aria-label="'+escapeHtml(name)+'" data-dish-id="'+escapeHtml(x.id)+'"><div class="dish-img"><img loading="lazy" src="'+escapeHtml(x.image||'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=85')+'" alt="'+escapeHtml(name)+'">'+(badge?'<span class="badge">'+escapeHtml(badge)+'</span>':'')+'</div><div class="dish-body"><div class="dish-top"><h3>'+escapeHtml(name)+'</h3><span class="price">'+escapeHtml(x.price||'')+'</span></div><p>'+escapeHtml(desc)+'</p></div></article>'}).join('');$('menuGrid').querySelectorAll('.dish[data-dish-id]').forEach(card=>{card.addEventListener('click',()=>openDishDetail(card.dataset.dishId));card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openDishDetail(card.dataset.dishId)}})})}
 $('language').addEventListener('change',e=>{currentLang=e.target.value;activeCategory='all';applyLanguage()});$('year').textContent=new Date().getFullYear();
 onSnapshot(collection(db,'menu'),snap=>{allItems=snap.docs.map(d=>({id:d.id,...d.data()}));renderFilters();renderMenu()},err=>{$('menuGrid').innerHTML='<div class="empty">Menu temporarily unavailable. Please try again later.</div>';console.error('Firestore menu read failed',err)});
 applyLanguage();
