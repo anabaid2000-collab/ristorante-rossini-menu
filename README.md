@@ -22,6 +22,14 @@ When people travel from one country to another, reading a restaurant menu in an 
 
 **My goal** is to make restaurant dining more welcoming, accessible, and convenient for international guests.
 
+## 📱 QR Code
+
+<div align="center">
+
+![QR code to open Ristorante Rossini Menu](https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=12&data=https%3A%2F%2Fristorante-rossini.web.app%2F)
+
+</div>
+
 ## 🌍 Languages
 
 The project is intended to support six menu languages:
