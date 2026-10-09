@@ -273,6 +273,20 @@ body.dish-detail-open{overflow:hidden}
  .dish-detail-close{top:10px;right:10px;width:40px;height:40px}
 }
 
+/* Improve category filter readability on desktop and mobile */
+#filters.filters .filter{
+  font-size:15px !important;
+  font-weight:600 !important;
+  line-height:1.4;
+  padding:11px 17px !important;
+}
+@media(max-width:520px){
+  #filters.filters .filter{
+    font-size:14px !important;
+    padding:10px 13px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -332,17 +346,3 @@ applyLanguage();
 </script>
 </body>
 </html>
-
-/* Improve category filter readability on desktop and mobile */
-#filters.filters .filter{
-  font-size:15px !important;
-  font-weight:600 !important;
-  line-height:1.4;
-  padding:11px 17px !important;
-}
-@media(max-width:520px){
-  #filters.filters .filter{
-    font-size:14px !important;
-    padding:10px 13px !important;
-  }
-}
