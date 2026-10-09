@@ -16,7 +16,11 @@
 
 ## ✨ About the Project
 
-Ristorante Rossini Menu is a web-based restaurant menu designed to make menu items accessible in multiple languages. The project repository contains the website source files and Firebase configuration.
+When we travel from one country to another, reading a restaurant menu in an unfamiliar language can be challenging. This can make it difficult to understand the available dishes and place an order with confidence.
+
+**Ristorante Rossini Menu helps make that experience easier.** With this website, visitors can select their preferred language and read the restaurant menu in a language they understand. This helps people from different countries explore the menu more comfortably and place their orders more easily, even when they do not speak the local language.
+
+Our goal is to make restaurant dining more welcoming, accessible, and convenient for international guests.
 
 ## 📱 Scan to Visit the Website
 
