@@ -18,6 +18,18 @@
 
 Ristorante Rossini Menu is a web-based restaurant menu designed to make menu items accessible in multiple languages. The project repository contains the website source files and Firebase configuration.
 
+## 📱 Scan to Visit the Website
+
+Scan this QR code with your phone camera to open the live Ristorante Rossini menu.
+
+<div align="center">
+
+[![Ristorante Rossini website QR code](https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=12&data=https%3A%2F%2Fristorante-rossini.web.app%2F)](https://ristorante-rossini.web.app/)
+
+**[Open Ristorante Rossini Menu](https://ristorante-rossini.web.app/)**
+
+</div>
+
 ## 🌍 Languages
 
 The project is intended to support six menu languages:
