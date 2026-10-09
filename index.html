@@ -287,6 +287,99 @@ body.dish-detail-open{overflow:hidden}
   }
 }
 
+
+/* Ristorante Rossini — Luxury Italian final palette and menu photography polish.
+   CSS-only presentation layer: Firebase, Firestore, admin auth, translations and menu JS unchanged. */
+:root{
+  color-scheme:light;
+  --cream:#f5eee2;--paper:#fffaf1;--wine:#702238;--wine2:#431321;
+  --gold:#c5a36a;--ink:#2c2420;--muted:#786b60;--line:#e3d2bb;
+  --shadow:0 18px 48px rgba(55,20,31,.10);
+}
+html{background:var(--cream)}
+body{background:linear-gradient(180deg,#fbf7ef 0%,#f5eee2 65%,#f8f1e6 100%);color:var(--ink)}
+header.wrap{background:rgba(251,247,239,.97);border-bottom:1px solid #dfcdb3;backdrop-filter:blur(12px)}
+.brand-mark{background:var(--wine);color:#fff8ed;border:1px solid var(--gold);box-shadow:inset 0 0 0 3px var(--wine),0 0 0 1px #c5a36a}
+.brand-name{color:var(--wine2)}
+.brand-sub{color:#877665}
+.nav a:not(.admin-nav){color:#51433b}
+.nav a:not(.admin-nav):hover{color:var(--wine)}
+.nav .admin-nav,.language{background:#fffaf1;border-color:#c5a36a;color:var(--wine)}
+.nav .admin-nav:hover{background:var(--wine);border-color:var(--wine);color:#fffaf1}
+.hero{background:var(--wine2);color:#fff8ec}
+.hero:before{background:radial-gradient(ellipse at 80% 15%,rgba(197,163,106,.19),transparent 36%),linear-gradient(115deg,#431321 0%,#652137 58%,#3a101c 100%)}
+.hero h1{color:#fff8ed}
+.hero h1 em{color:#dfc18a}
+.hero .eyebrow{color:#d6b777}
+.hero .intro{color:#e5d7ca}
+.hero .btn{background:var(--gold);border-color:var(--gold);color:#2c1718}
+.hero .btn:hover{background:#dfc18a}
+.hero .btn.secondary{background:transparent;border-color:#c5a36a;color:#fff6e7}
+.hero .hero-note,.hero-signature{color:#d8c29e}
+.hero-image{background:#33231e;box-shadow:0 24px 60px rgba(12,4,8,.32)}
+.hero-image:after{border-color:#f0dfc29c}
+.image-caption{background:#fffaf1;color:var(--wine2);border-left-color:var(--gold)}
+.image-caption span{color:#9b7740}
+.menu-section{background:transparent}
+.section-head h2,.visit h2{color:var(--wine2)}
+.section-head p,.visit p{color:var(--muted)}
+.section-head .eyebrow{color:#9c7944}
+#filters.filters{border-bottom:1px solid var(--line)}
+#filters.filters .filter{color:#77695d;border-bottom:2px solid transparent;background:transparent}
+#filters.filters .filter.active,#filters.filters .filter:hover{color:var(--wine);border-color:var(--gold);background:#efe3d1}
+.menu-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.dish{display:flex;flex-direction:column;background:var(--paper);border:1px solid #e6d6c1;box-shadow:0 7px 22px rgba(55,20,31,.045);min-width:0;overflow:hidden}
+.dish:hover{transform:translateY(-4px);border-color:#c5a36a;box-shadow:0 18px 38px rgba(55,20,31,.13)}
+.dish-img{height:245px;min-height:0;flex:0 0 auto;background:#e7d8c4;overflow:hidden}
+.dish-img img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .55s ease,filter .35s ease}
+.dish:hover .dish-img img{transform:scale(1.045);filter:saturate(1.04)}
+.badge{background:var(--wine);color:#fff8eb;border:1px solid rgba(255,255,255,.22);box-shadow:0 3px 12px #1d0c1040}
+.dish-body{display:flex;flex:1;flex-direction:column;align-self:stretch;padding:22px 22px 24px}
+.dish-top{align-items:flex-start;gap:12px}
+.dish h3{color:var(--wine2);font-size:22px;line-height:1.25}
+.dish p{color:var(--muted);font-size:12px;line-height:1.8}
+.dish-top .price,.price{color:#92703c!important;font-size:24px!important;font-weight:800!important;line-height:1.2;font-family:'DM Sans',sans-serif}
+.story{background:radial-gradient(ellipse at 85% 20%,#6b2b3d 0%,transparent 42%),linear-gradient(125deg,#431321,#5b1a2d 60%,#35101b);border-block:1px solid var(--gold)}
+.story h2{color:#fff7eb}
+.story p{color:#e4d4c5}
+.story-mark{color:#d2b16f;border-color:#c5a36a55;background:transparent}
+.visit .btn{background:var(--wine);border-color:var(--wine);color:#fff8ed}
+.visit .btn:hover{background:var(--wine2)}
+footer{background:#eee3d2;border-color:#ddc9ae;color:#76695c}
+.admin-link{color:var(--wine);opacity:.85}
+.dish-detail-overlay{background:rgba(30,8,16,.78)}
+.dish-detail-dialog{background:var(--paper);border-color:var(--gold)}
+.dish-detail-title{color:#b18a4b!important}
+.dish-detail-price{color:var(--wine)!important}
+.dish-detail-description{color:var(--muted)}
+.dish-detail-close{background:var(--paper);color:var(--wine2);border-color:var(--line)}
+.dish-detail-close:hover{background:var(--wine);color:#fffaf1}
+@media(max-width:900px){
+  .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .dish-img{height:230px}
+}
+@media(max-width:700px){
+  .menu-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .dish-img{height:clamp(150px,42vw,220px)}
+  .dish-body{padding:16px}
+  .dish h3{font-size:19px}
+  .dish-top .price,.price{font-size:21px!important}
+}
+@media(max-width:480px){
+  .menu-grid{grid-template-columns:1fr;gap:16px}
+  .dish{display:grid;grid-template-columns:40% minmax(0,1fr);flex-direction:initial}
+  .dish-img{height:100%;min-height:190px}
+  .dish-body{padding:18px 15px}
+  .dish h3{font-size:19px}
+  .dish-top{gap:8px}
+  .dish-top .price,.price{font-size:20px!important}
+  .dish p{font-size:12px;line-height:1.7}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .dish,.dish-img img,.btn{transition:none!important}
+}
+
 </style>
 </head>
 <body>
