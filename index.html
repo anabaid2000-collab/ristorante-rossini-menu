@@ -418,7 +418,7 @@ footer{background:#eee3d2;border-color:#ddc9ae;color:#76695c}
 .menu-section .dish .price{color:#e4c783!important}
 
 
-/* Full-bleed gold backdrop: menu section itself is also a .wrap, so override its max-width */
+/* Restore the original warm off-white menu background */
 section#menu.menu-section.wrap{
   width:100% !important;
   max-width:none !important;
@@ -426,11 +426,8 @@ section#menu.menu-section.wrap{
   margin-right:0 !important;
   padding-left:max(4%,calc((100% - 1160px)/2)) !important;
   padding-right:max(4%,calc((100% - 1160px)/2)) !important;
-  background-color:#9a7334 !important;
-  background-image:
-    radial-gradient(ellipse at 12% 8%,rgba(255,239,190,.3),transparent 34%),
-    radial-gradient(ellipse at 90% 82%,rgba(53,31,9,.2),transparent 38%),
-    linear-gradient(135deg,#7c5a28 0%,#b08a45 30%,#9a7334 68%,#6e4e22 100%) !important;
+  background:#f7f3eb !important;
+  background-image:none !important;
 }
 
 </style>
