@@ -134,13 +134,22 @@ footer{background:#0b0b0a;border-color:#3b342b;color:#a99e8e}.admin-link:hover{c
 @media(max-width:800px){header.wrap{background:#111110}.section-head h2{color:#f2e6d1}}
 
 
-/* Center menu category filters */
-.filters{
+/* Force menu category filters to stay centered on every screen */
+#filters.filters{
+  display:flex !important;
   justify-content:center !important;
-  align-items:center;
-  width:100%;
-  margin-left:auto;
-  margin-right:auto;
+  align-items:center !important;
+  flex-wrap:wrap !important;
+  width:100% !important;
+  margin:30px auto 34px !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  text-align:center !important;
+  border-bottom:0 !important;
+}
+#filters.filters .filter{
+  flex:0 0 auto;
+  float:none !important;
 }
 /* Price legibility: stronger, clearly readable menu prices */
 .dish-top{align-items:baseline;gap:14px}
