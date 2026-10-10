@@ -497,6 +497,39 @@ footer{background:#141311;border-top-color:#40372c;color:#b8ad9c}
  .image-caption{left:-10px;bottom:18px}
 }
 
+
+/* Full-screen restaurant photo hero, placed above the menu categories */
+.hero{position:relative;min-height:calc(100svh - 86px);display:flex;align-items:stretch;overflow:hidden;background:#100d0c}
+.hero-inner{position:relative;display:flex;align-items:center;width:100%;max-width:none;min-height:calc(100svh - 86px);padding:76px max(6vw,calc((100vw - 1160px)/2));gap:0}
+.hero-image{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;z-index:0;box-shadow:none;overflow:hidden}
+.hero-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 55%;filter:brightness(.72)}
+.hero-image:after{content:"";position:absolute;inset:0;border:0;background:linear-gradient(90deg,rgba(12,8,8,.88) 0%,rgba(12,8,8,.60) 43%,rgba(12,8,8,.12) 100%),linear-gradient(0deg,rgba(12,8,8,.46),transparent 48%)}
+.hero-copy{position:relative;z-index:2;align-self:center;max-width:660px;padding:36px 0}
+.hero-copy h1{font-size:clamp(3.6rem,7vw,6.5rem);text-shadow:0 3px 25px #0008}
+.hero-copy .intro{max-width:550px;color:#f2e9dc;text-shadow:0 2px 12px #000}
+.hero .hero-note,.hero .hero-signature,.hero .eyebrow{color:#e3c27f}
+.hero .hero-signature{border-color:#e4d0ad77}
+.hero .btn{box-shadow:0 8px 24px #0004}
+.hero .btn.secondary{background:rgba(20,14,12,.42);backdrop-filter:blur(6px)}
+.hero-image .image-caption{left:auto;right:6vw;bottom:34px;z-index:2;background:rgba(20,15,12,.8);backdrop-filter:blur(8px)}
+.hero-image .image-number{z-index:2}
+@media(max-width:800px){
+ .hero,.hero-inner{min-height:calc(88svh - 64px)}
+ .hero-inner{padding:48px 7vw}
+ .hero-image img{object-position:58% center}
+ .hero-image:after{background:linear-gradient(90deg,rgba(12,8,8,.78),rgba(12,8,8,.25)),linear-gradient(0deg,rgba(12,8,8,.4),transparent 65%)}
+ .hero-copy{max-width:620px;padding:24px 0 70px}
+ .hero-image .image-caption{right:5vw;bottom:18px}
+}
+@media(max-width:520px){
+ .hero,.hero-inner{min-height:calc(86svh - 60px)}
+ .hero-inner{padding:36px 6vw}
+ .hero-copy h1{font-size:clamp(3.1rem,13vw,4.5rem)}
+ .hero-copy .intro{font-size:1rem}
+ .hero-image .image-caption{max-width:75%;padding:12px 14px}
+ .hero-image .image-number{top:20px;right:20px}
+}
+
 </style>
 <style>
 .menu-toggle{display:inline-flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:42px;height:42px;border:1px solid #7b633c;background:#171512;color:#e8d5ad;cursor:pointer;flex-shrink:0}.menu-toggle span{width:19px;height:2px;background:currentColor}.site-header{display:flex;align-items:center;gap:14px}.nav{margin-left:auto}
