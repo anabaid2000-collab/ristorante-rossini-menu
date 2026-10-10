@@ -1453,3 +1453,69 @@ applyLanguage();startNotificationListeners();renderNotifications();
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
 })();
 </script>
+
+
+<style id="rossini-language-button-dropdown-fix">
+@media(max-width:700px){
+  #menu .section-head #languageMenuWrap{position:relative!important}
+  #menu .section-head #languageMenuButton{position:relative!important}
+  #menu .section-head #languageMenuButton .globe{display:inline-block!important}
+  #menu .section-head #languageMenuButton .ln{display:inline-block!important}
+  #menu .section-head #languageMenuButton:focus{outline:2px solid #c5a66e!important;outline-offset:2px!important}
+  #menu .section-head #languageMenu{display:none!important}
+  #menu .section-head #languageMenuPopup{
+    display:none;position:absolute;top:calc(100% + 7px);right:0;z-index:9999;
+    min-width:150px;padding:5px;background:#211c14;border:1px solid #9c7d49;
+    border-radius:7px;box-shadow:0 8px 22px #0008;
+  }
+  #menu .section-head #languageMenuPopup.open{display:block!important}
+  #menu .section-head #languageMenuPopup button{
+    display:block;width:100%;padding:9px 10px;text-align:left;border:0;border-radius:4px;
+    background:transparent;color:#f4ecdf;font:12px/1.2 sans-serif;cursor:pointer;
+  }
+  #menu .section-head #languageMenuPopup button.active{background:#59462b;color:#fff}
+  #menu .section-head #languageMenuPopup button:focus{outline:1px solid #c5a66e}
+}
+</style>
+<script id="rossini-language-button-dropdown-fix-script">
+(function(){
+ function setup(){
+  var original=document.getElementById('language');
+  var wrap=document.getElementById('languageMenuWrap');
+  var trigger=document.getElementById('languageMenuButton');
+  var select=document.getElementById('languageMenu');
+  if(!original||!wrap||!trigger||!select||document.getElementById('languageMenuPopup'))return;
+  // Remove the extra selector/globe decoration and show a real language list on click.
+  select.remove();
+  var popup=document.createElement('div');popup.id='languageMenuPopup';popup.setAttribute('role','menu');
+  var options=Array.from(original.options);
+  function render(){
+   popup.innerHTML='';
+   options.forEach(function(option){
+    var item=document.createElement('button');item.type='button';item.setAttribute('role','menuitemradio');
+    item.setAttribute('aria-checked',String(option.value===original.value));
+    item.textContent=option.textContent;
+    if(option.value===original.value)item.className='active';
+    item.addEventListener('click',function(){
+     original.value=option.value;
+     original.dispatchEvent(new Event('change',{bubbles:true}));
+     popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');render();
+    });
+    popup.appendChild(item);
+   });
+  }
+  render();wrap.appendChild(popup);
+  trigger.setAttribute('aria-haspopup','true');trigger.setAttribute('aria-expanded','false');
+  trigger.addEventListener('click',function(event){
+   event.preventDefault();event.stopPropagation();
+   var open=popup.classList.toggle('open');trigger.setAttribute('aria-expanded',String(open));
+   if(open)render();
+  });
+  document.addEventListener('click',function(event){
+   if(!wrap.contains(event.target)){popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');}
+  });
+  original.addEventListener('change',render);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
+</script>
