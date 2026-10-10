@@ -498,6 +498,21 @@ footer{background:#eee3d2;border-color:#ddc9ae;color:#76695c}
 <script>
 /* Fallback for browsers where Firebase module imports fail before the app starts. */
 window.__rossiniMenuBooted = false;
+function showStartupDiagnostic(reason) {
+  var grid = document.getElementById('menuGrid');
+  if (!grid || window.__rossiniMenuBooted) return;
+  window.__rossiniMenuBooted = true;
+  var detail = String(reason || 'Unknown startup error').slice(0, 240);
+  grid.innerHTML = '<div class="empty" role="status"><p>The menu app failed to start. Error: ' +
+    detail.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') +
+    '</p><button type="button" class="filter active" onclick="window.location.reload()">Reload menu</button></div>';
+}
+window.addEventListener('unhandledrejection', function (event) {
+  showStartupDiagnostic(event.reason && (event.reason.stack || event.reason.message) || event.reason);
+});
+window.addEventListener('error', function (event) {
+  if (event && (event.message || event.error)) showStartupDiagnostic(event.error && (event.error.stack || event.error.message) || event.message);
+});
 window.setTimeout(function () {
   if (window.__rossiniMenuBooted) return;
   var grid = document.getElementById('menuGrid');
