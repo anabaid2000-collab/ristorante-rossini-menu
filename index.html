@@ -1049,6 +1049,53 @@ header.wrap.site-header .brand-sub{display:none!important}
   .hero-copy{padding-bottom:0!important}
 }
 </style>
+
+<style id="rossini-hero-overlay-correction">
+/* Final hero correction: image starts immediately after the header, with copy over it. */
+@media (min-width:701px){
+  header.wrap.site-header{padding-bottom:14px!important;margin-bottom:0!important}
+}
+.hero{
+  position:relative!important;display:block!important;width:100%!important;max-width:none!important;
+  height:calc(100svh - 100px)!important;min-height:560px!important;max-height:none!important;
+  padding:0!important;margin:0!important;overflow:hidden!important;box-sizing:border-box!important;
+  background:#100d0c!important
+}
+.hero:before{
+  content:""!important;position:absolute!important;inset:0!important;z-index:0!important;
+  background-image:linear-gradient(90deg,rgba(10,7,7,.76) 0%,rgba(10,7,7,.48) 48%,rgba(10,7,7,.16) 100%),linear-gradient(0deg,rgba(10,7,7,.28),rgba(10,7,7,.12)),url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=90")!important;
+  background-size:cover!important;background-position:center 52%!important;background-repeat:no-repeat!important
+}
+.hero-inner{
+  position:relative!important;z-index:1!important;display:flex!important;align-items:center!important;
+  width:min(1160px,88%)!important;max-width:1160px!important;height:100%!important;min-height:0!important;
+  margin:0 auto!important;padding:32px 0!important;box-sizing:border-box!important
+}
+.hero-copy{
+  position:relative!important;z-index:2!important;width:min(660px,100%)!important;max-width:660px!important;
+  margin:0!important;padding:24px 0!important
+}
+.hero-copy h1{font-size:clamp(3rem,6.6vw,6.1rem)!important;line-height:1.03!important;text-shadow:0 3px 25px rgba(0,0,0,.65)!important}
+.hero-copy .intro{color:#f2e9dc!important;text-shadow:0 2px 12px rgba(0,0,0,.9)!important}
+.hero .eyebrow,.hero .hero-note{color:#e3c27f!important;text-shadow:0 2px 12px rgba(0,0,0,.85)!important}
+.hero-image{display:none!important}
+@media(max-width:700px){
+  .hero{height:auto!important;min-height:calc(100svh - 190px)!important}
+  .hero-inner{width:88%!important;height:auto!important;min-height:calc(100svh - 190px)!important;padding:32px 0!important}
+  .hero-copy{width:100%!important;padding:12px 0 20px!important}
+  .hero-copy h1{font-size:clamp(40px,11vw,62px)!important;line-height:1.03!important;margin:18px 0!important}
+  .hero-copy .intro{font-size:16px!important;line-height:1.65!important;max-width:100%!important}
+  .hero-actions{display:flex!important;flex-wrap:wrap!important;gap:10px!important}
+  .hero-actions .btn{flex:1 1 145px!important;min-width:0!important;text-align:center!important;padding:13px 12px!important}
+  .hero:before{background-image:linear-gradient(90deg,rgba(10,7,7,.76),rgba(10,7,7,.43)),linear-gradient(0deg,rgba(10,7,7,.38),rgba(10,7,7,.16)),url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=85")!important;background-position:58% center!important}
+}
+@media(max-width:380px){
+  .hero-inner{width:88%!important}
+  .hero-copy h1{font-size:clamp(38px,11vw,48px)!important}
+  .hero-actions .btn{flex-basis:100%!important}
+}
+</style>
+
 </head>
 <body>
 <header class="wrap site-header">
