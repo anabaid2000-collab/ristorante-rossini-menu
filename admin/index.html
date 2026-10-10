@@ -183,7 +183,7 @@ async function addRossiniSampleFoods(){
  console.info('Sample menu maintenance complete:',{duplicatesRemoved:removed,newDishesAdded:added});
  return {removed,added};
 }
-function start(){showAdminPage('menu');addRossiniSampleFoods().catch(e=>console.error('Sample food import failed:',e));unsub=onSnapshot(menuRef,snap=>{const all=snap.docs;categories=[...new Set([...all.filter(isCategoryDoc).map(d=>d.data().name||''),...all.filter(d=>!isCategoryDoc(d)).map(d=>d.data().category||'')].filter(Boolean))].sort((a,b)=>a.localeCompare(b));renderCategoryOptions();renderCategories(all);renderItems(all.filter(d=>!isCategoryDoc(d)))},e=>{$('items').innerHTML='<div class="msg">'+esc(e.message)+'</div>'});startOrders()}
+function start(){showAdminPage('menu');unsub=onSnapshot(menuRef,snap=>{const all=snap.docs;categories=[...new Set([...all.filter(isCategoryDoc).map(d=>d.data().name||''),...all.filter(d=>!isCategoryDoc(d)).map(d=>d.data().category||'')].filter(Boolean))].sort((a,b)=>a.localeCompare(b));renderCategoryOptions();renderCategories(all);renderItems(all.filter(d=>!isCategoryDoc(d)))},e=>{$('items').innerHTML='<div class="msg">'+esc(e.message)+'</div>'});startOrders()}
 
 function showAdminPage(page){
  const groups={menu:['add','categories','itemsSection'],orders:['ordersSection'],analytics:['analyticsSection']};
