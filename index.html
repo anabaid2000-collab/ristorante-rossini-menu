@@ -1242,3 +1242,29 @@ applyLanguage();startNotificationListeners();renderNotifications();
 </script>
 </body>
 </html>
+
+
+<style id="rossini-mobile-language-visible-final">
+@media(max-width:700px){
+  header.wrap.site-header{overflow:visible!important}
+  header.wrap.site-header .nav{overflow:visible!important}
+  header.wrap.site-header .nav #language.language{
+    display:flex!important;visibility:visible!important;opacity:1!important;
+    position:fixed!important;top:58px!important;right:112px!important;left:auto!important;
+    z-index:2147483647!important;transform:none!important;
+    width:38px!important;min-width:38px!important;max-width:38px!important;
+    height:38px!important;min-height:38px!important;box-sizing:border-box!important;
+    padding:0!important;margin:0!important;border:1px solid #d6b775!important;
+    border-radius:50%!important;background:#211c14!important;color:#f4ecdf!important;
+    font-size:0!important;line-height:1!important;text-align:center!important;
+    appearance:none!important;-webkit-appearance:none!important;
+  }
+  header.wrap.site-header .nav #language.language::before{
+    content:"🌐";font-size:18px;line-height:1;
+  }
+  header.wrap.site-header .nav #language.language option{font-size:13px!important}
+}
+@media(max-width:380px){
+  header.wrap.site-header .nav #language.language{top:54px!important;right:100px!important;width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important}
+}
+</style>
