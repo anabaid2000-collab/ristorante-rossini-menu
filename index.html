@@ -1647,3 +1647,75 @@ applyLanguage();startNotificationListeners();renderNotifications();
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+
+
+<style id="rossini-one-language-control-final">
+@media(max-width:700px){
+  header.wrap.site-header .nav #language.language{display:none!important}
+  #menu .section-head #languageMenuWrap{display:inline-flex!important;position:relative!important;align-items:center!important;flex:0 0 auto!important}
+  #menu .section-head #languageMenuButton{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;height:34px!important;padding:0 10px!important;border:1px solid #9c7d49!important;border-radius:6px!important;background:#211c14!important;color:#f4ecdf!important;font:600 12px/1 sans-serif!important;white-space:nowrap!important;cursor:pointer!important}
+  #menu .section-head #languageMenuPopup{display:none!important;position:absolute!important;top:calc(100% + 6px)!important;right:0!important;left:auto!important;z-index:999999!important;width:165px!important;min-width:165px!important;max-height:260px!important;overflow-y:auto!important;background:#211c14!important;border:1px solid #9c7d49!important;border-radius:7px!important;padding:5px!important;box-shadow:0 8px 22px #0008!important}
+  #menu .section-head #languageMenuPopup.open{display:block!important}
+  #menu .section-head #languageMenuPopup button{display:block!important;width:100%!important;text-align:left!important;padding:10px!important;background:transparent!important;color:#f4ecdf!important;border:0!important;border-radius:4px!important;font:12px/1.3 sans-serif!important}
+  #menu .section-head #languageMenuPopup button.active{background:#59462b!important}
+}
+</style>
+<script id="rossini-one-language-control-final-script">
+(function(){
+ function init(){
+  var original=document.getElementById('language');
+  var head=document.querySelector('#menu .section-head');
+  if(!original||!head)return;
+  // Remove every previous injected version, including duplicate IDs.
+  ['languageMenuWrap','languageMenuButton','languageMenuPopup','languageMenuGlobe','languageMenu'].forEach(function(id){
+   document.querySelectorAll('[id="'+id+'"]').forEach(function(el){el.remove();});
+  });
+  var wrap=document.createElement('span');
+  wrap.id='languageMenuWrap';
+  wrap.style.cssText='position:relative;display:inline-flex;align-items:center;flex:0 0 auto;';
+  var trigger=document.createElement('button');
+  trigger.type='button';trigger.id='languageMenuButton';
+  trigger.innerHTML='<span aria-hidden="true">🌐</span><span>LN</span>';
+  trigger.setAttribute('aria-label','Choose language');
+  trigger.setAttribute('aria-haspopup','true');
+  trigger.setAttribute('aria-expanded','false');
+  var popup=document.createElement('div');
+  popup.id='languageMenuPopup';popup.setAttribute('role','menu');
+  function render(){
+   popup.innerHTML='';
+   Array.from(original.options).forEach(function(option){
+    var item=document.createElement('button');
+    item.type='button';item.textContent=option.textContent;
+    item.setAttribute('role','menuitemradio');
+    item.setAttribute('aria-checked',String(option.value===original.value));
+    if(option.value===original.value)item.className='active';
+    item.addEventListener('click',function(e){
+     e.preventDefault();e.stopPropagation();
+     original.value=option.value;
+     original.dispatchEvent(new Event('change',{bubbles:true}));
+     popup.classList.remove('open');
+     trigger.setAttribute('aria-expanded','false');
+     render();
+    });
+    popup.appendChild(item);
+   });
+  }
+  render();
+  trigger.addEventListener('click',function(e){
+   e.preventDefault();e.stopPropagation();
+   var open=!popup.classList.contains('open');
+   popup.classList.toggle('open',open);
+   trigger.setAttribute('aria-expanded',String(open));
+  });
+  document.addEventListener('click',function(e){
+   if(!wrap.contains(e.target)){
+    popup.classList.remove('open');
+    trigger.setAttribute('aria-expanded','false');
+   }
+  });
+  original.addEventListener('change',render);
+  wrap.appendChild(trigger);wrap.appendChild(popup);head.appendChild(wrap);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
