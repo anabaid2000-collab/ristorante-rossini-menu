@@ -891,6 +891,25 @@ html,body{background:#10100f!important}
 }
 </style>
 
+<style id="language-selector-desktop-containing-block-fix">
+@media(min-width:701px){
+  /* A transform on .nav makes fixed descendants position relative to the nav, not the viewport. */
+  header.wrap.site-header{overflow:visible!important;transform:none!important}
+  header.wrap.site-header .nav{transform:none!important;overflow:visible!important}
+  header.wrap.site-header #language.language{
+    position:fixed!important;display:block!important;visibility:visible!important;opacity:1!important;
+    top:96px!important;right:24px!important;left:auto!important;bottom:auto!important;
+    z-index:2147483647!important;width:140px!important;max-width:180px!important;min-width:140px!important;
+    height:40px!important;min-height:40px!important;padding:8px 12px!important;
+    background:#211c14!important;color:#f4ecdf!important;border:2px solid #d6b775!important;
+    border-radius:5px!important;font:600 13px/1.2 'DM Sans',sans-serif!important;
+    box-shadow:0 6px 24px rgba(0,0,0,.6)!important;pointer-events:auto!important;
+  }
+}
+@media(min-width:701px) and (max-width:900px){
+  header.wrap.site-header #language.language{top:92px!important;right:16px!important}
+}
+</style>
 </head>
 <body>
 <header class="wrap site-header">
