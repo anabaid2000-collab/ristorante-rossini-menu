@@ -655,6 +655,25 @@ html,body{margin:0!important;width:100%;max-width:100%;overflow-x:hidden}
  .hero-image .image-caption{max-width:75%!important;padding:12px 14px!important}
 }
 </style>
+<style id="rossini-screenshot-layout-fix">
+/* Layout corrections based on screenshot: remove hero badge and center the full menu */
+.hero-image .image-caption{display:none!important}
+.hero-image .image-number{display:none!important}
+.menu-section{width:min(1160px,92vw)!important;max-width:1160px!important;margin-left:auto!important;margin-right:auto!important;padding:64px 0 80px!important;box-sizing:border-box!important}
+.menu-section .section-head{display:block!important;width:100%!important;max-width:720px!important;margin:0 auto 34px!important;text-align:center!important}
+.menu-section .section-head .eyebrow{justify-content:center!important}
+.menu-section .section-head .eyebrow:before{display:none!important}
+.menu-section .section-head h2,.menu-section .section-head p{text-align:center!important}
+.menu-section .filters{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:18px!important;width:100%!important;max-width:100%!important;margin:30px auto 34px!important;box-sizing:border-box!important}
+.menu-section .filter-group{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;width:100%!important;max-width:100%!important;gap:10px!important}
+.menu-section .filter-group-label{display:block!important;text-align:center!important;width:100%!important}
+.menu-section .filter-group-options{display:flex!important;flex-wrap:wrap!important;align-items:center!important;justify-content:center!important;gap:8px!important;width:100%!important}
+.menu-section .menu-grid{width:100%!important}
+@media(max-width:800px){
+ .menu-section{width:90vw!important;padding:48px 0 60px!important}
+ .menu-section .filters{gap:16px!important}
+}
+</style>
 </head>
 <body>
 <header class="wrap site-header">
