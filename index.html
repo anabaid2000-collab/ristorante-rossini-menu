@@ -844,6 +844,24 @@ html,body{background:#10100f!important}
  .nav>a.admin-nav{right:10px!important}
 }
 </style>
+<style id="rossini-desktop-header-compact">
+/* Desktop and tablet header: hide text nav links, keep compact circular utility controls in top-right */
+@media(min-width:701px){
+ header.wrap.site-header{position:relative!important;padding-right:150px!important}
+ .nav{position:absolute!important;top:50%!important;right:24px!important;transform:translateY(-50%)!important;display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:10px!important;width:auto!important}
+ .nav>a[href="#menu"],.nav>a[href="#story"]{display:none!important}
+ .nav>a[href="#visit"],.nav>a.admin-nav,.nav .notification-bell{width:42px!important;min-width:42px!important;height:42px!important;min-height:42px!important;padding:0!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:0!important}
+ .nav>a[href="#visit"]::before{content:"☎"!important;font-size:19px!important;line-height:1!important}
+ .nav>a.admin-nav::before{content:"🔒"!important;font-size:17px!important;line-height:1!important}
+ .nav .notification-bell>span[aria-hidden="true"]{font-size:19px!important;line-height:1!important}
+ .nav .language{position:absolute!important;top:calc(100% + 12px)!important;right:0!important;height:34px!important;min-height:34px!important;padding:5px 10px!important;font-size:12px!important;white-space:nowrap!important}
+}
+@media(min-width:701px) and (max-width:900px){
+ header.wrap.site-header{padding-right:140px!important}
+ .nav{right:16px!important;gap:7px!important}
+ .nav>a[href="#visit"],.nav>a.admin-nav,.nav .notification-bell{width:36px!important;min-width:36px!important;height:36px!important;min-height:36px!important}
+}
+</style>
 </head>
 <body>
 <header class="wrap site-header">
