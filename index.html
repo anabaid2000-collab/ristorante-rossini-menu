@@ -862,6 +862,17 @@ html,body{background:#10100f!important}
  .nav>a[href="#visit"],.nav>a.admin-nav,.nav .notification-bell{width:36px!important;min-width:36px!important;height:36px!important;min-height:36px!important}
 }
 </style>
+<style id="rossini-desktop-language-visible-fix">
+/* Ensure desktop language selector stays visible and does not sit beneath the header */
+@media(min-width:701px){
+ header.wrap.site-header{padding-bottom:54px!important}
+ .nav{top:50%!important;right:24px!important;overflow:visible!important}
+ .nav .language{display:inline-flex!important;visibility:visible!important;opacity:1!important;position:fixed!important;top:86px!important;right:24px!important;z-index:9999!important;transform:none!important;min-width:112px!important;width:auto!important;height:36px!important;min-height:36px!important;padding:6px 12px!important;background:#201b14!important;color:#f6efe3!important;border:1px solid #9c7d49!important;border-radius:7px!important;font-size:13px!important;line-height:1.2!important;pointer-events:auto!important}
+}
+@media(min-width:701px) and (max-width:900px){
+ .nav .language{right:16px!important;top:82px!important}
+}
+</style>
 </head>
 <body>
 <header class="wrap site-header">
