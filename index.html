@@ -1984,3 +1984,27 @@ h1 em{color:#8F4E55!important}
 #menu .section-head #languageMenuPopup button{color:#FFFCF6!important}
 #menu .section-head #languageMenuPopup button.active{background:#8F4E55!important}
 </style>
+
+
+
+<style id="rossini-remove-remaining-dark-surfaces">
+/* Finish replacing legacy black surfaces while preserving the signature palette */
+:root{color-scheme:light}
+html,body,main{background:#F5F0E6!important;color:#333126!important}
+#menu{background:#E7D8D0!important;background-color:#E7D8D0!important}
+header.wrap.site-header,.site-header,header,footer{background:#F5F0E6!important;background-color:#F5F0E6!important}
+#languageMenu,#languageMenuButton,#languageMenuPopup,
+#menu .section-head #languageMenuButton,
+#menu .section-head #languageMenuPopup{
+  background-color:#713B43!important;color:#FFFCF6!important;border-color:#C3A96B!important;
+}
+#languageMenuPopup button,#menu .section-head #languageMenuPopup button{color:#FFFCF6!important}
+#languageMenuPopup button.active,#menu .section-head #languageMenuPopup button.active{background:#8F4E55!important}
+.dish,.dish-card,.menu-card,.menu-item,.menu-category{background:#FFFCF6!important;color:#333126!important;border-color:#E1D7C4!important}
+input,select,textarea{background:#FFFCF6!important;color:#333126!important;border-color:#C3A96B!important}
+hr{border-color:#E1D7C4!important}
+@media(prefers-color-scheme:dark){
+ html,body,main,header.wrap.site-header,.site-header,header,footer{background:#F5F0E6!important;color:#333126!important}
+ #menu{background:#E7D8D0!important}
+}
+</style>
