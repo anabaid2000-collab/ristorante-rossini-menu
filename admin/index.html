@@ -116,38 +116,43 @@ $('loginBtn').onclick=async()=>{ $('loginMsg').classList.add('hidden');try{await
 
 async function addRossiniSampleFoods(){
  const samples=[
- {category:'Pizza',name:'Margherita Pizza',price:'€12',image:'https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80',description:'Pomodoro, mozzarella e basilico fresco.',descriptionEn:'Tomato sauce, mozzarella, and fresh basil.',badge:'Classic'},
- {category:'Pizza',name:'Four Cheese Pizza',price:'€15',image:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80',description:'Quattro formaggi italiani su una base croccante.',descriptionEn:'Four Italian cheeses on a crisp pizza base.',badge:'Cheese Lover'},
- {category:'Pizza',name:'Diavola Pizza',price:'€14',image:'https://images.unsplash.com/photo-1594007654729-407eedc4be65?auto=format&fit=crop&w=900&q=80',description:'Salame piccante, mozzarella e peperoncino.',descriptionEn:'Spicy salami, mozzarella, and chili flakes.',badge:'Spicy'},
- {category:'Pasta',name:'Spaghetti Carbonara',price:'€14',image:'https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?auto=format&fit=crop&w=900&q=80',description:'Guanciale, pecorino, uova e pepe nero.',descriptionEn:'Guanciale, pecorino cheese, eggs, and black pepper.',badge:'Classic'},
- {category:'Pasta',name:'Fettuccine Alfredo',price:'€13',image:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80',description:'Fettuccine cremose con burro e parmigiano.',descriptionEn:'Creamy fettuccine with butter and Parmesan.',badge:'Creamy'},
- {category:'Pasta',name:'Bolognese Lasagna',price:'€16',image:'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=900&q=80',description:'Lasagne al forno con ragù e besciamella.',descriptionEn:'Oven-baked lasagna with Bolognese ragù and béchamel.',badge:'House Favorite'},
- {category:'Pasta',name:'Spicy Arrabbiata Penne',price:'€12',image:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=80',description:'Penne al pomodoro, aglio e peperoncino.',descriptionEn:'Penne with tomato, garlic, and chili.',badge:'Spicy'},
- {category:'Pasta',name:'Spinach and Ricotta Ravioli',price:'€15',image:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80',description:'Ravioli ripieni di ricotta e spinaci.',descriptionEn:'Ravioli filled with ricotta and spinach.',badge:'Fresh Pasta'},
- {category:'Risotto',name:'Mushroom Risotto',price:'€16',image:'https://images.unsplash.com/photo-1476124369491-e7addf5db371?auto=format&fit=crop&w=900&q=80',description:'Riso cremoso con funghi e parmigiano.',descriptionEn:'Creamy risotto with mushrooms and Parmesan.',badge:'Vegetarian'},
- {category:'Risotto',name:'Seafood Risotto',price:'€19',image:'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?auto=format&fit=crop&w=900&q=80',description:'Risotto ai frutti di mare con erbe fresche.',descriptionEn:'Seafood risotto finished with fresh herbs.',badge:'Seafood'},
- {category:'Appetizer',name:'Tomato Bruschetta',price:'€8',image:'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=900&q=80',description:'Pane tostato con pomodoro, aglio e basilico.',descriptionEn:'Toasted bread with tomato, garlic, and basil.',badge:'Starter'},
- {category:'Salad',name:'Caprese Salad',price:'€10',image:'https://images.unsplash.com/photo-1608039829572-78524f79c4c7?auto=format&fit=crop&w=900&q=80',description:'Mozzarella, pomodori maturi e basilico fresco.',descriptionEn:'Fresh mozzarella, ripe tomatoes, and basil.',badge:'Fresh'},
- {category:'Salad',name:'Caesar Salad',price:'€11',image:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80',description:'Insalata croccante con parmigiano e crostini.',descriptionEn:'Crisp salad with Parmesan and croutons.',badge:'Popular'},
- {category:'Appetizer',name:'Rice Arancini',price:'€9',image:'https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80',description:'Crocchette di riso dorate con ripieno saporito.',descriptionEn:'Golden rice balls with a savory filling.',badge:'Starter'},
- {category:'Main Course',name:'Pesto Gnocchi',price:'€14',image:'https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&w=900&q=80',description:'Gnocchi morbidi con pesto al basilico.',descriptionEn:'Soft potato gnocchi tossed with basil pesto.',badge:'Vegetarian'},
- {category:'Main Course',name:'Chicken Parmesan',price:'€18',image:'https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?auto=format&fit=crop&w=900&q=80',description:'Pollo croccante con pomodoro e mozzarella.',descriptionEn:'Crispy chicken topped with tomato sauce and mozzarella.',badge:'House Favorite'},
- {category:'Main Course',name:'Grilled Salmon',price:'€21',image:'https://images.unsplash.com/photo-1463620910506-d0458143143e?auto=format&fit=crop&w=900&q=80',description:'Salmone alla griglia con limone ed erbe.',descriptionEn:'Grilled salmon with lemon and fresh herbs.',badge:'Chef Special'},
- {category:'Dessert',name:'Tiramisu',price:'€8',image:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=900&q=80',description:'Mascarpone, caffè e cacao.',descriptionEn:'Mascarpone, coffee, and cocoa.',badge:'Signature'},
- {category:'Dessert',name:'Panna Cotta',price:'€7',image:'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80',description:'Panna cotta alla vaniglia con frutti di bosco.',descriptionEn:'Vanilla panna cotta with berry coulis.',badge:'Classic'},
- {category:'Dessert',name:'Sicilian Cannoli',price:'€7',image:'https://images.unsplash.com/photo-1519915028121-7d3463d20b13?auto=format&fit=crop&w=900&q=80',description:'Cialda croccante ripiena di crema dolce alla ricotta.',descriptionEn:'Crisp pastry shells filled with sweet ricotta cream.',badge:'Sicilian'}
+ {category:'Seafood',name:'Linguine with Garlic Shrimp',price:'€18',image:'https://images.unsplash.com/photo-1563379091339-03246963d96c?auto=format&fit=crop&w=900&q=80',description:'Linguine with tender shrimp, garlic, lemon, and parsley.',descriptionEn:'Linguine with tender shrimp, garlic, lemon, and parsley.',badge:'Seafood'},
+ {category:'Pizza',name:'Prosciutto and Rocket Pizza',price:'€16',image:'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=900&q=80',description:'Wood-fired pizza with prosciutto, fresh rocket, and shaved Parmesan.',descriptionEn:'Wood-fired pizza with prosciutto, fresh rocket, and shaved Parmesan.',badge:'Chef Special'},
+ {category:'Pasta',name:'Pesto Chicken Penne',price:'€15',image:'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=80',description:'Penne tossed with basil pesto and grilled chicken.',descriptionEn:'Penne tossed with basil pesto and grilled chicken.',badge:'Popular'},
+ {category:'Main Course',name:'Beef Tenderloin with Rosemary',price:'€26',image:'https://images.unsplash.com/photo- steak-placeholder?auto=format&fit=crop&w=900&q=80',description:'Grilled beef tenderloin served with rosemary potatoes.',descriptionEn:'Grilled beef tenderloin served with rosemary potatoes.',badge:'Chef Special'},
+ {category:'Main Course',name:'Eggplant Parmesan Bake',price:'€16',image:'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80',description:'Baked eggplant layered with tomato sauce, mozzarella, and Parmesan.',descriptionEn:'Baked eggplant layered with tomato sauce, mozzarella, and Parmesan.',badge:'Vegetarian'},
+ {category:'Pasta',name:'Lemon Ricotta Tagliatelle',price:'€15',image:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80',description:'Fresh tagliatelle with creamy ricotta, lemon zest, and herbs.',descriptionEn:'Fresh tagliatelle with creamy ricotta, lemon zest, and herbs.',badge:'Fresh Pasta'},
+ {category:'Appetizer',name:'Garlic Parmesan Focaccia',price:'€7',image:'https://images.unsplash.com/photo-1619531040576-f94167406618?auto=format&fit=crop&w=900&q=80',description:'Warm focaccia with roasted garlic, olive oil, and Parmesan.',descriptionEn:'Warm focaccia with roasted garlic, olive oil, and Parmesan.',badge:'Starter'},
+ {category:'Soup',name:'Tuscan Tomato Soup',price:'€9',image:'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80',description:'Rustic tomato soup with basil and toasted bread.',descriptionEn:'Rustic tomato soup with basil and toasted bread.',badge:'Comfort Food'},
+ {category:'Salad',name:'Pear and Gorgonzola Salad',price:'€12',image:'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80',description:'Fresh greens with pear, Gorgonzola, walnuts, and balsamic dressing.',descriptionEn:'Fresh greens with pear, Gorgonzola, walnuts, and balsamic dressing.',badge:'Fresh'},
+ {category:'Seafood',name:'Calamari Fritti',price:'€13',image:'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=900&q=80',description:'Crispy fried calamari served with lemon and herb dip.',descriptionEn:'Crispy fried calamari served with lemon and herb dip.',badge:'Seafood'},
+ {category:'Main Course',name:'Herb Roasted Chicken',price:'€19',image:'https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=900&q=80',description:'Roasted chicken with Italian herbs and seasonal vegetables.',descriptionEn:'Roasted chicken with Italian herbs and seasonal vegetables.',badge:'House Favorite'},
+ {category:'Pasta',name:'Baked Spinach Cannelloni',price:'€15',image:'https://images.unsplash.com/photo-1574894709920-11b28e7367e3?auto=format&fit=crop&w=900&q=80',description:'Cannelloni filled with spinach and ricotta in tomato sauce.',descriptionEn:'Cannelloni filled with spinach and ricotta in tomato sauce.',badge:'Vegetarian'},
+ {category:'Dessert',name:'Chocolate Lava Cake',price:'€9',image:'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=900&q=80',description:'Warm chocolate cake with a soft centre, served with vanilla cream.',descriptionEn:'Warm chocolate cake with a soft centre, served with vanilla cream.',badge:'Sweet Favorite'},
+ {category:'Dessert',name:'Lemon Sorbet',price:'€6',image:'https://images.unsplash.com/photo-1488900128323-21503983a07e?auto=format&fit=crop&w=900&q=80',description:'Refreshing Italian lemon sorbet.',descriptionEn:'Refreshing Italian lemon sorbet.',badge:'Refreshing'},
+ {category:'Side Dish',name:'Rosemary Parmesan Potatoes',price:'€7',image:'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=900&q=80',description:'Roasted potatoes with rosemary, garlic, and Parmesan.',descriptionEn:'Roasted potatoes with rosemary, garlic, and Parmesan.',badge:'Side'}
  ];
+ const normalizeName=value=>String(value||'').toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]/g,'');
  const snap=await getDocs(menuRef);
- const existing=new Set(snap.docs.filter(d=>!isCategoryDoc(d)).map(d=>String(d.data().name||'').trim().toLowerCase()));
+ const seen=new Set(),existing=new Set();
+ let removed=0;
+ for(const d of snap.docs){
+  if(isCategoryDoc(d))continue;
+  const name=normalizeName(d.data().name);
+  if(!name)continue;
+  if(seen.has(name)){await deleteDoc(doc(db,'menu',d.id));removed++;}
+  else {seen.add(name);existing.add(name);}
+ }
  let added=0;
  for(const item of samples){
-  if(existing.has(item.name.toLowerCase()))continue;
+  const key=normalizeName(item.name);
+  if(existing.has(key))continue;
   item.available=true;item.order=Date.now()+added;
-  await addDoc(menuRef,item);existing.add(item.name.toLowerCase());added++;
+  await addDoc(menuRef,item);existing.add(key);added++;
  }
- return added;
+ console.info('Sample menu maintenance complete:',{duplicatesRemoved:removed,newDishesAdded:added});
+ return {removed,added};
 }
-
 function start(){showAdminPage('menu');addRossiniSampleFoods().catch(e=>console.error('Sample food import failed:',e));unsub=onSnapshot(menuRef,snap=>{const all=snap.docs;categories=[...new Set([...all.filter(isCategoryDoc).map(d=>d.data().name||''),...all.filter(d=>!isCategoryDoc(d)).map(d=>d.data().category||'')].filter(Boolean))].sort((a,b)=>a.localeCompare(b));renderCategoryOptions();renderCategories(all);renderItems(all.filter(d=>!isCategoryDoc(d)))},e=>{$('items').innerHTML='<div class="msg">'+esc(e.message)+'</div>'});startOrders()}
 
 function showAdminPage(page){
