@@ -1305,80 +1305,8 @@ applyLanguage();startNotificationListeners();renderNotifications();
 </style>
 
 
-<style id="rossini-language-beside-our-menu-heading">
-@media(max-width:700px){
-  #menu .section-head{
-    display:flex!important;flex-wrap:wrap!important;align-items:center!important;
-    justify-content:center!important;column-gap:10px!important;row-gap:0!important;
-  }
-  #menu .section-head h2{
-    display:inline-block!important;flex:0 1 auto!important;margin:0!important;
-    text-align:center!important;
-  }
-  #menu .section-head .eyebrow,
-  #menu .section-head p{display:none!important}
-  #menu .section-head #language.language{
-    display:inline-block!important;position:relative!important;top:auto!important;right:auto!important;left:auto!important;
-    transform:none!important;z-index:5!important;flex:0 0 128px!important;
-    width:128px!important;min-width:128px!important;max-width:128px!important;
-    height:34px!important;min-height:34px!important;margin:0!important;
-    padding:0 6px 0 27px!important;box-sizing:border-box!important;
-    font-size:11px!important;line-height:1.2!important;
-    color:#f4ecdf!important;background:#211c14!important;
-    border:1px solid #9c7d49!important;border-radius:5px!important;
-    appearance:auto!important;-webkit-appearance:menulist!important;
-  }
-  #menu .section-head #language.language::before{
-    content:"🌐";position:absolute;left:7px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none;
-  }
-  header.wrap.site-header .nav #language.language{display:none!important}
-  header.wrap.site-header .nav>a[href="#menu"]{display:none!important}
-}
-@media(max-width:380px){
-  #menu .section-head{column-gap:7px!important}
-  #menu .section-head h2{font-size:30px!important}
-  #menu .section-head #language.language{flex-basis:118px!important;width:118px!important;min-width:118px!important;max-width:118px!important;height:32px!important;min-height:32px!important;font-size:10px!important}
-}
-</style>
 
 
-<style id="rossini-language-beside-menu-title-final">
-#menu .section-head #languageMenuWrap{display:none}
-@media(max-width:700px){
-  #menu .section-head{
-    display:flex!important;flex-wrap:nowrap!important;align-items:center!important;
-    justify-content:center!important;column-gap:8px!important;row-gap:0!important;
-  }
-  #menu .section-head h2{
-    display:inline-block!important;flex:0 1 auto!important;margin:0!important;
-    text-align:center!important;font-size:clamp(25px,7vw,34px)!important;
-    white-space:nowrap!important;
-  }
-  #menu .section-head .eyebrow,#menu .section-head p{display:none!important}
-  #menu .section-head #languageMenuWrap{
-    display:flex!important;align-items:center!important;gap:4px!important;
-    flex:0 0 auto!important;position:relative!important;
-  }
-  #menu .section-head #languageMenu{
-    display:block!important;position:relative!important;top:auto!important;right:auto!important;left:auto!important;
-    transform:none!important;z-index:5!important;flex:0 0 116px!important;
-    width:116px!important;min-width:116px!important;max-width:116px!important;
-    height:34px!important;min-height:34px!important;margin:0!important;
-    padding:0 4px!important;box-sizing:border-box!important;font-size:10px!important;
-    line-height:1.2!important;color:#f4ecdf!important;background:#211c14!important;
-    border:1px solid #9c7d49!important;border-radius:5px!important;
-    appearance:auto!important;-webkit-appearance:menulist!important;
-  }
-  #menu .section-head #languageMenuGlobe{font-size:15px!important;line-height:1!important}
-  header.wrap.site-header .nav #language.language{display:none!important}
-  header.wrap.site-header .nav>a[href="#menu"]{display:none!important}
-}
-@media(max-width:380px){
-  #menu .section-head{column-gap:5px!important}
-  #menu .section-head h2{font-size:25px!important}
-  #menu .section-head #languageMenu{flex-basis:105px!important;width:105px!important;min-width:105px!important;max-width:105px!important;height:32px!important;min-height:32px!important;font-size:9px!important}
-}
-</style>
 <script id="rossini-language-beside-menu-title-final-script">
 (function(){
   function setupMenuLanguage(){
