@@ -1307,37 +1307,7 @@ applyLanguage();startNotificationListeners();renderNotifications();
 
 
 
-<script id="rossini-language-beside-menu-title-final-script">
-(function(){
-  function setupMenuLanguage(){
-    var original=document.getElementById('language');
-    var head=document.querySelector('#menu .section-head');
-    if(!original||!head||document.getElementById('languageMenu')) return;
-    var wrap=document.createElement('span');
-    wrap.id='languageMenuWrap';
-    var globe=document.createElement('span');
-    globe.id='languageMenuGlobe';
-    globe.textContent='🌐';
-    globe.setAttribute('aria-hidden','true');
-    var clone=document.createElement('select');
-    clone.id='languageMenu';
-    clone.className='language';
-    clone.setAttribute('aria-label','Choose language');
-    clone.innerHTML=original.innerHTML;
-    clone.value=original.value;
-    wrap.appendChild(globe);
-    wrap.appendChild(clone);
-    head.appendChild(wrap);
-    clone.addEventListener('change',function(){
-      original.value=clone.value;
-      original.dispatchEvent(new Event('change',{bubbles:true}));
-    });
-    original.addEventListener('change',function(){clone.value=original.value;});
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setupMenuLanguage);
-  else setupMenuLanguage();
-})();
-</script>
+
 
 
 <style id="rossini-language-single-button">
@@ -1355,32 +1325,7 @@ applyLanguage();startNotificationListeners();renderNotifications();
   header.wrap.site-header .nav>a[href="#menu"]{display:none!important}
 }
 </style>
-<script id="rossini-language-single-button-script">
-(function(){
- function setup(){
-  var original=document.getElementById('language');
-  var head=document.querySelector('#menu .section-head');
-  if(!original||!head||document.getElementById('languageMenuButton')) return;
-  var wrap=document.createElement('span'); wrap.id='languageMenuWrap';
-  var button=document.createElement('button'); button.type='button'; button.id='languageMenuButton';
-  button.setAttribute('aria-label','Change language');
-  button.innerHTML='<span class="globe" aria-hidden="true">🌐</span><span class="ln">LN</span>';
-  var select=document.createElement('select'); select.id='languageMenu'; select.className='language';
-  select.setAttribute('aria-label','Choose language'); select.innerHTML=original.innerHTML; select.value=original.value;
-  wrap.appendChild(button); wrap.appendChild(select); head.appendChild(wrap);
-  button.addEventListener('click',function(){
-   var current=select.value;
-   var options=Array.from(select.options);
-   var index=options.findIndex(function(o){return o.value===current;});
-   select.value=options[(index+1)%options.length].value;
-   original.value=select.value;
-   original.dispatchEvent(new Event('change',{bubbles:true}));
-  });
-  original.addEventListener('change',function(){select.value=original.value;});
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
-})();
-</script>
+
 
 
 <style id="rossini-language-button-dropdown-fix">
@@ -1405,48 +1350,7 @@ applyLanguage();startNotificationListeners();renderNotifications();
   #menu .section-head #languageMenuPopup button:focus{outline:1px solid #c5a66e}
 }
 </style>
-<script id="rossini-language-button-dropdown-fix-script">
-(function(){
- function setup(){
-  var original=document.getElementById('language');
-  var wrap=document.getElementById('languageMenuWrap');
-  var trigger=document.getElementById('languageMenuButton');
-  var select=document.getElementById('languageMenu');
-  if(!original||!wrap||!trigger||!select||document.getElementById('languageMenuPopup'))return;
-  // Remove the extra selector/globe decoration and show a real language list on click.
-  select.remove();
-  var popup=document.createElement('div');popup.id='languageMenuPopup';popup.setAttribute('role','menu');
-  var options=Array.from(original.options);
-  function render(){
-   popup.innerHTML='';
-   options.forEach(function(option){
-    var item=document.createElement('button');item.type='button';item.setAttribute('role','menuitemradio');
-    item.setAttribute('aria-checked',String(option.value===original.value));
-    item.textContent=option.textContent;
-    if(option.value===original.value)item.className='active';
-    item.addEventListener('click',function(){
-     original.value=option.value;
-     original.dispatchEvent(new Event('change',{bubbles:true}));
-     popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');render();
-    });
-    popup.appendChild(item);
-   });
-  }
-  render();wrap.appendChild(popup);
-  trigger.setAttribute('aria-haspopup','true');trigger.setAttribute('aria-expanded','false');
-  trigger.addEventListener('click',function(event){
-   event.preventDefault();event.stopPropagation();
-   var open=popup.classList.toggle('open');trigger.setAttribute('aria-expanded',String(open));
-   if(open)render();
-  });
-  document.addEventListener('click',function(event){
-   if(!wrap.contains(event.target)){popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');}
-  });
-  original.addEventListener('change',render);
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
-})();
-</script>
+
 
 
 <style id="rossini-language-clean-final">
@@ -1460,113 +1364,10 @@ applyLanguage();startNotificationListeners();renderNotifications();
   #menu .section-head #languageMenuPopup{position:absolute!important;top:calc(100% + 5px)!important;right:0!important;left:auto!important;z-index:99999!important;min-width:150px!important}
 }
 </style>
-<script id="rossini-language-clean-final-script">
-(function(){
- function setup(){
-  var original=document.getElementById('language');
-  var head=document.querySelector('#menu .section-head');
-  if(!original||!head)return;
-  // Remove duplicate controls injected by earlier revisions.
-  ['languageMenuGlobe'].forEach(function(id){var e=document.getElementById(id);if(e)e.remove();});
-  var wrap=document.getElementById('languageMenuWrap');
-  var trigger=document.getElementById('languageMenuButton');
-  if(!wrap||!trigger){
-   wrap=document.createElement('span');wrap.id='languageMenuWrap';
-   trigger=document.createElement('button');trigger.type='button';trigger.id='languageMenuButton';
-   trigger.innerHTML='<span aria-hidden="true">🌐</span><span>LN</span>';
-   trigger.setAttribute('aria-label','Choose language');
-   wrap.appendChild(trigger);head.appendChild(wrap);
-  } else {
-   // Replace button contents so exactly one globe is shown.
-   trigger.innerHTML='<span aria-hidden="true">🌐</span><span>LN</span>';
-  }
-  // Remove hidden selector: language changes only after an explicit list choice.
-  var hiddenSelect=document.getElementById('languageMenu');if(hiddenSelect)hiddenSelect.remove();
-  var popup=document.getElementById('languageMenuPopup');
-  if(!popup){popup=document.createElement('div');popup.id='languageMenuPopup';popup.setAttribute('role','menu');wrap.appendChild(popup);}
-  // Ensure popup is a child of the same button wrapper for exact alignment.
-  if(popup.parentElement!==wrap)wrap.appendChild(popup);
-  var options=Array.from(original.options);
-  function render(){
-   popup.innerHTML='';
-   options.forEach(function(option){
-    var item=document.createElement('button');item.type='button';item.setAttribute('role','menuitemradio');
-    item.textContent=option.textContent;item.setAttribute('aria-checked',String(option.value===original.value));
-    if(option.value===original.value)item.className='active';
-    item.addEventListener('click',function(){
-     original.value=option.value;
-     original.dispatchEvent(new Event('change',{bubbles:true}));
-     popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');
-     render();
-    });
-    popup.appendChild(item);
-   });
-  }
-  render();
-  trigger.setAttribute('aria-haspopup','true');
-  if(!trigger.dataset.languageListBound){
-   trigger.dataset.languageListBound='1';
-   trigger.addEventListener('click',function(event){
-    event.preventDefault();event.stopPropagation();
-    var isOpen=popup.classList.toggle('open');
-    trigger.setAttribute('aria-expanded',String(isOpen));
-    if(isOpen)render();
-   });
-   document.addEventListener('click',function(event){
-    if(!wrap.contains(event.target)){popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');}
-   });
-  }
-  original.addEventListener('change',render);
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
-})();
-</script>
 
 
-<script id="rossini-language-dropdown-last-fix-script">
-(function(){
- function init(){
-  var original=document.getElementById('language');
-  var head=document.querySelector('#menu .section-head');
-  if(!original||!head)return;
-  var oldWrap=document.getElementById('languageMenuWrap');
-  var oldPopup=document.getElementById('languageMenuPopup');
-  var oldButton=document.getElementById('languageMenuButton');
-  // Remove the old click handlers by replacing the entire mobile control.
-  if(oldWrap)oldWrap.remove();
-  var wrap=document.createElement('span');wrap.id='languageMenuWrap';
-  wrap.style.cssText='position:relative;display:inline-flex;align-items:center;flex:0 0 auto;';
-  var button=document.createElement('button');button.type='button';button.id='languageMenuButton';
-  button.innerHTML='<span aria-hidden="true">🌐</span><span>LN</span>';
-  button.setAttribute('aria-label','Choose language');button.setAttribute('aria-haspopup','true');button.setAttribute('aria-expanded','false');
-  var popup=document.createElement('div');popup.id='languageMenuPopup';popup.setAttribute('role','menu');
-  var options=Array.from(original.options);
-  options.forEach(function(option){
-   var item=document.createElement('button');item.type='button';item.textContent=option.textContent;
-   item.setAttribute('role','menuitemradio');item.setAttribute('aria-checked',String(option.value===original.value));
-   if(option.value===original.value)item.className='active';
-   item.addEventListener('click',function(e){
-    e.preventDefault();e.stopPropagation();
-    original.value=option.value;
-    original.dispatchEvent(new Event('change',{bubbles:true}));
-    Array.from(popup.querySelectorAll('button')).forEach(function(b){b.classList.toggle('active',b===item);b.setAttribute('aria-checked',String(b===item));});
-    popup.classList.remove('open');button.setAttribute('aria-expanded','false');
-   });
-   popup.appendChild(item);
-  });
-  button.addEventListener('click',function(e){
-   e.preventDefault();e.stopPropagation();
-   var open=!popup.classList.contains('open');
-   popup.classList.toggle('open',open);button.setAttribute('aria-expanded',String(open));
-  });
-  document.addEventListener('click',function(e){
-   if(!wrap.contains(e.target)){popup.classList.remove('open');button.setAttribute('aria-expanded','false');}
-  });
-  wrap.appendChild(button);wrap.appendChild(popup);head.appendChild(wrap);
- }
- if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-})();
-</script>
+
+
 
 
 <style id="rossini-one-language-control-final">
