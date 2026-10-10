@@ -1519,3 +1519,77 @@ applyLanguage();startNotificationListeners();renderNotifications();
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
 })();
 </script>
+
+
+<style id="rossini-language-clean-final">
+/* Disable all earlier duplicate mobile language controls. */
+@media(max-width:700px){
+  header.wrap.site-header .nav #language.language{display:none!important}
+  #menu .section-head #languageMenuGlobe{display:none!important}
+  #menu .section-head #languageMenu{display:none!important}
+  #menu .section-head #languageMenuWrap{display:inline-flex!important;position:relative!important;align-items:center!important;flex:0 0 auto!important}
+  #menu .section-head #languageMenuButton{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;height:34px!important;padding:0 10px!important;position:relative!important;z-index:20!important}
+  #menu .section-head #languageMenuPopup{position:absolute!important;top:calc(100% + 5px)!important;right:0!important;left:auto!important;z-index:99999!important;min-width:150px!important}
+}
+</style>
+<script id="rossini-language-clean-final-script">
+(function(){
+ function setup(){
+  var original=document.getElementById('language');
+  var head=document.querySelector('#menu .section-head');
+  if(!original||!head)return;
+  // Remove duplicate controls injected by earlier revisions.
+  ['languageMenuGlobe'].forEach(function(id){var e=document.getElementById(id);if(e)e.remove();});
+  var wrap=document.getElementById('languageMenuWrap');
+  var trigger=document.getElementById('languageMenuButton');
+  if(!wrap||!trigger){
+   wrap=document.createElement('span');wrap.id='languageMenuWrap';
+   trigger=document.createElement('button');trigger.type='button';trigger.id='languageMenuButton';
+   trigger.innerHTML='<span aria-hidden="true">🌐</span><span>LN</span>';
+   trigger.setAttribute('aria-label','Choose language');
+   wrap.appendChild(trigger);head.appendChild(wrap);
+  } else {
+   // Replace button contents so exactly one globe is shown.
+   trigger.innerHTML='<span aria-hidden="true">🌐</span><span>LN</span>';
+  }
+  // Remove hidden selector: language changes only after an explicit list choice.
+  var hiddenSelect=document.getElementById('languageMenu');if(hiddenSelect)hiddenSelect.remove();
+  var popup=document.getElementById('languageMenuPopup');
+  if(!popup){popup=document.createElement('div');popup.id='languageMenuPopup';popup.setAttribute('role','menu');wrap.appendChild(popup);}
+  // Ensure popup is a child of the same button wrapper for exact alignment.
+  if(popup.parentElement!==wrap)wrap.appendChild(popup);
+  var options=Array.from(original.options);
+  function render(){
+   popup.innerHTML='';
+   options.forEach(function(option){
+    var item=document.createElement('button');item.type='button';item.setAttribute('role','menuitemradio');
+    item.textContent=option.textContent;item.setAttribute('aria-checked',String(option.value===original.value));
+    if(option.value===original.value)item.className='active';
+    item.addEventListener('click',function(){
+     original.value=option.value;
+     original.dispatchEvent(new Event('change',{bubbles:true}));
+     popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');
+     render();
+    });
+    popup.appendChild(item);
+   });
+  }
+  render();
+  trigger.setAttribute('aria-haspopup','true');
+  if(!trigger.dataset.languageListBound){
+   trigger.dataset.languageListBound='1';
+   trigger.addEventListener('click',function(event){
+    event.preventDefault();event.stopPropagation();
+    var isOpen=popup.classList.toggle('open');
+    trigger.setAttribute('aria-expanded',String(isOpen));
+    if(isOpen)render();
+   });
+   document.addEventListener('click',function(event){
+    if(!wrap.contains(event.target)){popup.classList.remove('open');trigger.setAttribute('aria-expanded','false');}
+   });
+  }
+  original.addEventListener('change',render);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
+</script>
