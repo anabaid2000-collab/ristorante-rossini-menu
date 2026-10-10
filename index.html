@@ -1328,48 +1328,6 @@ applyLanguage();startNotificationListeners();renderNotifications();
 
 
 
-<style id="rossini-language-button-dropdown-fix">
-@media(max-width:700px){
-  #menu .section-head #languageMenuWrap{position:relative!important}
-  #menu .section-head #languageMenuButton{position:relative!important}
-  #menu .section-head #languageMenuButton .globe{display:inline-block!important}
-  #menu .section-head #languageMenuButton .ln{display:inline-block!important}
-  #menu .section-head #languageMenuButton:focus{outline:2px solid #c5a66e!important;outline-offset:2px!important}
-  #menu .section-head #languageMenu{display:none!important}
-  #menu .section-head #languageMenuPopup{
-    display:none;position:absolute;top:calc(100% + 7px);right:0;z-index:9999;
-    min-width:150px;padding:5px;background:#211c14;border:1px solid #9c7d49;
-    border-radius:7px;box-shadow:0 8px 22px #0008;
-  }
-  #menu .section-head #languageMenuPopup.open{display:block!important}
-  #menu .section-head #languageMenuPopup button{
-    display:block;width:100%;padding:9px 10px;text-align:left;border:0;border-radius:4px;
-    background:transparent;color:#f4ecdf;font:12px/1.2 sans-serif;cursor:pointer;
-  }
-  #menu .section-head #languageMenuPopup button.active{background:#59462b;color:#fff}
-  #menu .section-head #languageMenuPopup button:focus{outline:1px solid #c5a66e}
-}
-</style>
-
-
-
-<style id="rossini-language-clean-final">
-/* Disable all earlier duplicate mobile language controls. */
-@media(max-width:700px){
-  header.wrap.site-header .nav #language.language{display:none!important}
-  #menu .section-head #languageMenuGlobe{display:none!important}
-  #menu .section-head #languageMenu{display:none!important}
-  #menu .section-head #languageMenuWrap{display:inline-flex!important;position:relative!important;align-items:center!important;flex:0 0 auto!important}
-  #menu .section-head #languageMenuButton{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;height:34px!important;padding:0 10px!important;position:relative!important;z-index:20!important}
-  #menu .section-head #languageMenuPopup{position:absolute!important;top:calc(100% + 5px)!important;right:0!important;left:auto!important;z-index:99999!important;min-width:150px!important}
-}
-</style>
-
-
-
-
-
-
 <style id="rossini-one-language-control-final">
 @media(max-width:700px){
   header.wrap.site-header .nav #language.language{display:none!important}
