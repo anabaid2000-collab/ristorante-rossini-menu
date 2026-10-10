@@ -303,6 +303,31 @@ function renderItems(docs){
 }
 $('addCat').onclick=async()=>{const c=$('newCat').value.trim();if(!c)return alert('Enter a category name.');if(categories.some(x=>x.toLowerCase()===c.toLowerCase()))return alert('That category already exists.');try{await setDoc(doc(db,'menu',categoryDocId(c)),{type:'category',name:c});$('newCat').value=''}catch(e){alert(e.message)}};
 $('newUploadBtn').onclick=async()=>{try{const data=await fileToDataUrl($('newImageFile').files[0]);$('newImage').value=data;$('newPreview').src=data;$('newPreview').classList.remove('hidden')}catch(e){alert(e.message)}};
+
+// Add extra menu suggestions only when explicitly requested by the admin; never auto-run on login.
+async function addExtraRossiniItems(){
+ const samples=[
+  {category:'Pasta',name:'Pappardelle al Ragù',price:'€17',image:'https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=900&q=80',description:'Wide ribbons of pasta served with slow-cooked Italian meat ragù.',descriptionEn:'Wide ribbons of pasta served with slow-cooked Italian meat ragù.',badge:'Italian Classic'},
+  {category:'Pizza',name:'Margherita Classica',price:'€13',image:'https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=900&q=80',description:'Tomato, fresh mozzarella, basil, and extra-virgin olive oil.',descriptionEn:'Tomato, fresh mozzarella, basil, and extra-virgin olive oil.',badge:'Classic'},
+  {category:'Appetizer',name:'Bruschetta al Pomodoro',price:'€8',image:'https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?auto=format&fit=crop&w=900&q=80',description:'Toasted country bread topped with ripe tomatoes, basil, and olive oil.',descriptionEn:'Toasted country bread topped with ripe tomatoes, basil, and olive oil.',badge:'Starter'},
+  {category:'Salad',name:'Caprese Salad',price:'€11',image:'https://images.unsplash.com/photo-1592417817098-8fd3d9eb14a5?auto=format&fit=crop&w=900&q=80',description:'Fresh mozzarella, ripe tomatoes, basil, and extra-virgin olive oil.',descriptionEn:'Fresh mozzarella, ripe tomatoes, basil, and extra-virgin olive oil.',badge:'Fresh'},
+  {category:'Seafood',name:'Salmon with Lemon Butter',price:'€22',image:'https://images.unsplash.com/photo-1467043153537-a4fba2cd39ef?auto=format&fit=crop&w=900&q=80',description:'Pan-seared salmon with a light lemon-butter sauce and seasonal vegetables.',descriptionEn:'Pan-seared salmon with a light lemon-butter sauce and seasonal vegetables.',badge:'Chef Special'},
+  {category:'Main Course',name:'Chicken Milanese',price:'€18',image:'https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=900&q=80',description:'Crispy golden breaded chicken served with lemon and fresh greens.',descriptionEn:'Crispy golden breaded chicken served with lemon and fresh greens.',badge:'Popular'},
+  {category:'Side Dish',name:'Garlic Butter Mushrooms',price:'€8',image:'https://images.unsplash.com/photo-1504545102780-26774c1bb073?auto=format&fit=crop&w=900&q=80',description:'Sautéed mushrooms with garlic, butter, parsley, and black pepper.',descriptionEn:'Sautéed mushrooms with garlic, butter, parsley, and black pepper.',badge:'Side'},
+  {category:'Dessert',name:'Tiramisu',price:'€8',image:'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=900&q=80',description:'Classic Italian dessert layered with coffee-soaked sponge and mascarpone cream.',descriptionEn:'Classic Italian dessert layered with coffee-soaked sponge and mascarpone cream.',badge:'Italian Favorite'},
+  {category:'Dessert',name:'Panna Cotta with Berry Sauce',price:'€7',image:'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=900&q=80',description:'Silky vanilla panna cotta served with a bright berry sauce.',descriptionEn:'Silky vanilla panna cotta served with a bright berry sauce.',badge:'Sweet Favorite'},
+  {category:'Soup',name:'Minestrone Soup',price:'€9',image:'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=900&q=80',description:'Traditional vegetable soup with beans, herbs, and seasonal vegetables.',descriptionEn:'Traditional vegetable soup with beans, herbs, and seasonal vegetables.',badge:'Vegetarian'}
+ ];
+ const normalize=value=>String(value||'').toLowerCase().normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').replace(/[^a-z0-9]/g,'');
+ const snap=await getDocs(menuRef);const existing=new Set(snap.docs.filter(d=>!isCategoryDoc(d)).map(d=>normalize(d.data().name)));
+ let added=0,skipped=0;
+ for(const item of samples){
+  if(existing.has(normalize(item.name))){skipped++;continue;}
+  item.available=true;item.order=Date.now()+added;
+  await addDoc(menuRef,item);existing.add(normalize(item.name));added++;
+ }
+ return {added,skipped};
+}
 async function addNewItem(withTranslation){
   const name=$('newName').value.trim();
   if(!name)return alert('Enter a dish name.');
