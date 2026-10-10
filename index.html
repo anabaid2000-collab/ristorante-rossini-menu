@@ -675,19 +675,29 @@ html,body{margin:0!important;width:100%;max-width:100%;overflow-x:hidden}
 }
 </style>
 <style id="rossini-hero-final-structural-fix">
-/* Robust full-bleed hero: image is attached to the hero section, not the nested image card */
+/* Hero photo fills the space directly below the header; copy and buttons overlay the photo. */
 .hero{position:relative!important;display:block!important;width:100%!important;height:calc(100svh - 84px)!important;min-height:600px!important;padding:0!important;margin:0!important;overflow:hidden!important;background:#100d0c!important}
-.hero:before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background-image:linear-gradient(90deg,rgba(10,7,7,.82) 0%,rgba(10,7,7,.55) 43%,rgba(10,7,7,.12) 100%),linear-gradient(0deg,rgba(10,7,7,.4),transparent 48%),url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=90")!important;background-size:cover!important;background-position:center 52%!important;background-repeat:no-repeat!important}
-.hero-inner{position:relative!important;z-index:1!important;display:flex!important;align-items:center!important;width:100%!important;max-width:1160px!important;height:100%!important;min-height:0!important;margin:0 auto!important;padding:50px 0!important;box-sizing:border-box!important}
-.hero-copy{position:relative!important;z-index:2!important;width:min(660px,90%)!important;max-width:660px!important;margin:0!important;padding:24px 0 45px!important}
-.hero-copy h1{font-size:clamp(3.5rem,7vw,6.5rem)!important}
-.hero-copy .intro{color:#f2e9dc!important}
+.hero:before{content:""!important;position:absolute!important;inset:0!important;z-index:0!important;background-image:linear-gradient(90deg,rgba(10,7,7,.82) 0%,rgba(10,7,7,.55) 43%,rgba(10,7,7,.12) 100%),linear-gradient(0deg,rgba(10,7,7,.35),transparent 48%),url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=90")!important;background-size:cover!important;background-position:center 52%!important;background-repeat:no-repeat!important}
+.hero-inner{position:relative!important;z-index:1!important;display:flex!important;align-items:center!important;width:min(1160px,88%)!important;max-width:1160px!important;height:100%!important;min-height:0!important;margin:0 auto!important;padding:32px 0!important;box-sizing:border-box!important}
+.hero-copy{position:relative!important;z-index:2!important;width:min(660px,100%)!important;max-width:660px!important;margin:0!important;padding:24px 0!important}
+.hero-copy h1{font-size:clamp(3.5rem,7vw,6.5rem)!important;text-shadow:0 3px 25px #0008!important}
+.hero-copy .intro{color:#f2e9dc!important;text-shadow:0 2px 12px #000!important}
 .hero .eyebrow,.hero .hero-note,.hero .hero-signature{color:#e3c27f!important}
-.hero-image{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;opacity:0!important;pointer-events:none!important;box-shadow:none!important}
-.hero-image img,.hero-image:after,.hero-image .image-caption,.hero-image .image-number{display:none!important}
-@media(max-width:1200px){.hero-inner{width:88%!important}}
-@media(max-width:800px){.hero{height:calc(100svh - 68px)!important;min-height:560px!important}.hero-inner{width:86%!important;padding:36px 0!important}.hero:before{background-position:58% center!important;background-image:linear-gradient(90deg,rgba(10,7,7,.78),rgba(10,7,7,.22)),linear-gradient(0deg,rgba(10,7,7,.42),transparent 65%),url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1600&q=85")!important;background-size:cover!important}}
-@media(max-width:520px){.hero{height:calc(100svh - 60px)!important;min-height:540px!important}.hero-inner{width:88%!important}.hero-copy h1{font-size:clamp(3rem,13vw,4.4rem)!important}.hero-copy .intro{font-size:1rem!important}}
+.hero-image{display:none!important}
+@media(max-width:800px){
+ .hero{height:auto!important;min-height:calc(100svh - 68px)!important;max-height:none!important}
+ .hero-inner{width:88%!important;min-height:calc(100svh - 68px)!important;height:auto!important;padding:32px 0!important}
+ .hero-copy{padding:20px 0!important;width:100%!important}
+ .hero-copy h1{font-size:clamp(42px,10.8vw,68px)!important;line-height:1.02!important;margin:18px 0!important}
+ .hero-copy .intro{font-size:16px!important;line-height:1.65!important;max-width:100%!important}
+ .hero-actions{display:flex!important;flex-wrap:wrap!important;gap:10px!important}
+ .hero-actions .btn{flex:1 1 145px!important;min-width:0!important;text-align:center!important;padding:14px 12px!important;font-size:12px!important}
+}
+@media(max-width:520px){
+ .hero{min-height:calc(100svh - 60px)!important}
+ .hero-inner{min-height:calc(100svh - 60px)!important;width:88%!important}
+ .hero-copy h1{font-size:clamp(40px,12vw,58px)!important}
+}
 </style>
 <style id="rossini-menu-compact-fix">
 /* Compact menu intro and eliminate right-side colour strip */
