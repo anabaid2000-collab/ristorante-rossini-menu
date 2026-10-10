@@ -1719,3 +1719,32 @@ applyLanguage();startNotificationListeners();renderNotifications();
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+
+
+<style id="rossini-oval-filter-buttons">
+/* Oval-shaped category and availability controls on desktop and mobile */
+#filters.filters .filter,
+.filters .filter.availability-filter,
+#filters.filters .filter-separator {
+  border-radius: 999px !important;
+}
+#filters.filters .filter {
+  border: 1px solid var(--gold, #c5a36a) !important;
+  padding: 10px 18px !important;
+  min-height: 38px;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+}
+#filters.filters .filter.active,
+#filters.filters .filter:hover,
+.filters .filter.availability-filter.active {
+  border-radius: 999px !important;
+}
+@media (max-width: 700px) {
+  #filters.filters { gap: 8px !important; }
+  #filters.filters .filter {
+    border-radius: 999px !important;
+    padding: 9px 14px !important;
+    min-height: 36px;
+  }
+}
+</style>
