@@ -1268,3 +1268,38 @@ applyLanguage();startNotificationListeners();renderNotifications();
   header.wrap.site-header .nav #language.language{top:54px!important;right:100px!important;width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important}
 }
 </style>
+
+
+<style id="rossini-mobile-language-next-to-menu">
+@media(max-width:700px){
+  header.wrap.site-header .nav>a[href="#menu"]{
+    display:inline-flex!important;position:fixed!important;left:12px!important;top:58px!important;
+    right:auto!important;z-index:2147483646!important;
+    height:36px!important;min-height:36px!important;padding:0 12px!important;
+    align-items:center!important;justify-content:center!important;
+    font-size:12px!important;line-height:1!important;
+    color:#f4ecdf!important;background:#211c14!important;
+    border:1px solid #9c7d49!important;border-radius:5px!important;
+  }
+  header.wrap.site-header .nav #language.language{
+    position:fixed!important;left:92px!important;right:auto!important;top:58px!important;
+    display:block!important;visibility:visible!important;opacity:1!important;
+    z-index:2147483647!important;transform:none!important;
+    width:132px!important;min-width:132px!important;max-width:132px!important;
+    height:36px!important;min-height:36px!important;box-sizing:border-box!important;
+    margin:0!important;padding:0 8px 0 30px!important;
+    font-size:12px!important;line-height:1.2!important;text-align:left!important;
+    color:#f4ecdf!important;background-color:#211c14!important;
+    border:1px solid #9c7d49!important;border-radius:5px!important;
+    appearance:auto!important;-webkit-appearance:menulist!important;
+  }
+  header.wrap.site-header .nav #language.language::before{
+    content:"🌐";position:absolute;left:8px;top:50%;transform:translateY(-50%);
+    font-size:15px;line-height:1;pointer-events:none;
+  }
+}
+@media(max-width:380px){
+  header.wrap.site-header .nav>a[href="#menu"]{left:8px!important;top:54px!important;height:34px!important;min-height:34px!important;padding:0 8px!important}
+  header.wrap.site-header .nav #language.language{left:78px!important;top:54px!important;width:124px!important;min-width:124px!important;max-width:124px!important;height:34px!important;min-height:34px!important;font-size:11px!important}
+}
+</style>
