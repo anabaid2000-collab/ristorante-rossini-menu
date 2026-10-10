@@ -506,8 +506,12 @@ window.setTimeout(function () {
 }, 15000);
 </script>
 <script type="module">
-import {initializeApp} from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js';
-import {getFirestore,collection,doc,onSnapshot,setDoc,serverTimestamp} from 'https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js';
+const [firebaseAppModule,firebaseFirestoreModule]=await Promise.all([
+  import('https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js').catch(()=>import('https://esm.sh/firebase@12.1.0/app')),
+  import('https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js').catch(()=>import('https://esm.sh/firebase@12.1.0/firestore'))
+]);
+const {initializeApp}=firebaseAppModule;
+const {getFirestore,collection,doc,onSnapshot,setDoc,serverTimestamp}=firebaseFirestoreModule;
 const firebaseConfig={apiKey:'AIzaSyCvLtUCpKWhVeMh7QcbrlJZpvtAPAIplXo',authDomain:'ristorante-rossini.firebaseapp.com',projectId:'ristorante-rossini',storageBucket:'ristorante-rossini.firebasestorage.app',appId:'1:886098533105:web:6528ce9772520d02b4e750'};
 const app=initializeApp(firebaseConfig),db=getFirestore(app);
 const $=id=>document.getElementById(id);
