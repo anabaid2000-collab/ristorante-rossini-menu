@@ -873,6 +873,24 @@ html,body{background:#10100f!important}
  .nav .language{right:16px!important;top:82px!important}
 }
 </style>
+
+<style id="language-selector-visibility-fix">
+/* Keep the language picker visible on desktop and mobile */
+#language.language{
+  display:inline-flex!important;visibility:visible!important;opacity:1!important;
+  position:fixed!important;top:96px!important;right:20px!important;z-index:100000!important;
+  width:auto!important;min-width:128px!important;max-width:180px!important;height:40px!important;
+  padding:8px 30px 8px 12px!important;margin:0!important;
+  background:#211c14!important;color:#f4ecdf!important;border:1px solid #d6b775!important;
+  border-radius:5px!important;font:600 13px/1.2 'DM Sans',sans-serif!important;
+  box-shadow:0 6px 20px rgba(0,0,0,.35)!important;pointer-events:auto!important;
+}
+#language.language option{background:#211c14!important;color:#f4ecdf!important}
+@media(max-width:800px){
+  #language.language{top:82px!important;right:12px!important;min-width:112px!important;height:36px!important;font-size:12px!important}
+}
+</style>
+
 </head>
 <body>
 <header class="wrap site-header">
