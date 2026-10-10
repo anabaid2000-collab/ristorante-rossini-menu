@@ -1037,6 +1037,16 @@ hr.divider.wrap{margin-top:0!important;margin-bottom:0!important}
   .hero-inner{padding-bottom:20px!important}
   .hero-copy{padding-bottom:0!important}
 }
+
+/* Targeted spacing fix: remove the hero signature and only its excess lower gap */
+.hero-signature{display:none !important}
+.hero{padding-bottom:clamp(24px,3vw,40px) !important}
+.hero-copy{padding-bottom:0 !important}
+@media(max-width:800px){
+  .hero{padding-bottom:28px !important}
+  .hero-copy{padding-bottom:0 !important}
+}
+
 </style>
 </head>
 <body>
