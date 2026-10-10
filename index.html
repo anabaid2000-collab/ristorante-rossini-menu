@@ -1748,3 +1748,20 @@ applyLanguage();startNotificationListeners();renderNotifications();
   }
 }
 </style>
+
+
+<style id="rossini-restore-desktop-language-position">
+/* Desktop keeps the original header language selector; mobile keeps the compact menu control. */
+@media(min-width:701px){
+  header.wrap.site-header .nav #language.language{
+    display:inline-block!important;
+    visibility:visible!important;
+    opacity:1!important;
+    pointer-events:auto!important;
+  }
+  #menu .section-head #languageMenuWrap,
+  #menu .section-head #languageMenuButton,
+  #menu .section-head #languageMenuPopup{
+    display:none!important;
+  }
+}
