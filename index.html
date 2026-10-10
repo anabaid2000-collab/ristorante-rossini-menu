@@ -1028,25 +1028,16 @@ html,body{background:#10100f!important}
 header.wrap.site-header .brand-sub{display:none!important}
 </style>
 <style id="rossini-remove-hero-signature-final">
-/* Remove the small signature below the hero divider and reclaim its space. */
+/* Precise fix: remove the hero signature and reduce the hero's lower whitespace
+   without changing the header, image sizing, menu, or navigation controls. */
 .hero-copy .hero-signature{display:none!important}
-.hero-copy .hero-note{margin-bottom:0!important}
 .hero{padding-bottom:0!important;margin-bottom:0!important}
-hr.divider.wrap{margin-top:0!important;margin-bottom:0!important}
-@media(max-width:700px){
-  .hero-inner{padding-bottom:20px!important}
+.hero-inner{padding-bottom:0!important}
+.hero-copy{padding-bottom:0!important}
+@media(max-width:800px){
+  .hero-inner{padding-bottom:0!important}
   .hero-copy{padding-bottom:0!important}
 }
-
-/* Targeted spacing fix: remove the hero signature and only its excess lower gap */
-.hero-signature{display:none !important}
-.hero{padding-bottom:clamp(24px,3vw,40px) !important}
-.hero-copy{padding-bottom:0 !important}
-@media(max-width:800px){
-  .hero{padding-bottom:28px !important}
-  .hero-copy{padding-bottom:0 !important}
-}
-
 </style>
 </head>
 <body>
