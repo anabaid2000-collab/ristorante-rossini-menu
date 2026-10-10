@@ -768,6 +768,28 @@ html,body{background:#10100f!important}
   .nav>a{font-size:11px!important}
 }
 </style>
+<style id="rossini-mobile-nav-refinement">
+/* Mobile navigation refinement: smaller page buttons, icon-only contact/admin, bell + language row */
+@media(max-width:700px){
+ header.wrap.site-header{gap:10px!important;padding:12px 14px 14px!important}
+ .brand-mark{flex-basis:48px!important;width:48px!important;height:48px!important}
+ .brand-name{font-size:clamp(21px,5.2vw,27px)!important}
+ .nav{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+ .nav>a{min-height:38px!important;padding:7px 6px!important;font-size:11px!important;letter-spacing:.05em!important;border-radius:5px!important}
+ .nav>a[href="#visit"]{font-size:0!important;min-height:38px!important}
+ .nav>a[href="#visit"]::before{content:"☎";font-size:21px!important;line-height:1!important}
+ .nav>a.admin-nav{font-size:0!important;min-height:38px!important}
+ .nav>a.admin-nav::before{content:"🔒";font-size:20px!important;line-height:1!important}
+ .nav .notification-bell{grid-column:1!important;grid-row:3!important;width:100%!important;min-height:40px!important;height:40px!important;padding:6px!important}
+ .nav .notification-bell>span[aria-hidden="true"]{font-size:22px!important;line-height:1!important}
+ .nav .language{grid-column:2!important;grid-row:3!important;width:100%!important;min-width:0!important;min-height:40px!important;height:40px!important;padding:6px 9px!important;font-size:13px!important}
+}
+@media(max-width:380px){
+ header.wrap.site-header{padding:10px 12px 12px!important}
+ .nav>a{min-height:36px!important;padding:6px 4px!important}
+ .nav .notification-bell,.nav .language{min-height:38px!important;height:38px!important}
+}
+</style>
 </head>
 <body>
 <header class="wrap site-header">
