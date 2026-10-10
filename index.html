@@ -817,6 +817,21 @@ html,body{background:#10100f!important}
  .nav .language{font-size:11px!important;padding:4px 6px!important}
 }
 </style>
+<style id="rossini-mobile-nav-final-tidy">
+@media(max-width:700px){
+ .nav>a[href="#menu"],.nav>a[href="#story"]{display:none!important}
+ .nav{display:flex!important;flex-wrap:wrap!important;align-items:center!important;gap:7px!important;padding-right:0!important}
+ .nav>a[href="#visit"]{position:absolute!important;top:12px!important;right:52px!important;grid-column:auto!important;grid-row:auto!important;width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important;margin:0!important;border-radius:50%!important;font-size:0!important;display:flex!important;align-items:center!important;justify-content:center!important}
+ .nav>a[href="#visit"]::before{content:"☎"!important;font-size:16px!important;line-height:1!important}
+ .nav>a.admin-nav{top:12px!important;right:12px!important;width:34px!important;min-width:34px!important;height:34px!important;min-height:34px!important}
+ .nav .notification-bell{margin-left:0!important;grid-column:auto!important;grid-row:auto!important}
+ .nav .language{margin-left:0!important;grid-column:auto!important;grid-row:auto!important}
+}
+@media(max-width:380px){
+ .nav>a[href="#visit"]{top:10px!important;right:46px!important;width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important}
+ .nav>a.admin-nav{top:10px!important;right:10px!important;width:30px!important;min-width:30px!important;height:30px!important;min-height:30px!important}
+}
+</style>
 </head>
 <body>
 <header class="wrap site-header">
