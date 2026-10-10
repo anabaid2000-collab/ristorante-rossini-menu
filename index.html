@@ -1340,3 +1340,73 @@ applyLanguage();startNotificationListeners();renderNotifications();
   #menu .section-head #language.language{flex-basis:118px!important;width:118px!important;min-width:118px!important;max-width:118px!important;height:32px!important;min-height:32px!important;font-size:10px!important}
 }
 </style>
+
+
+<style id="rossini-language-beside-menu-title-final">
+#menu .section-head #languageMenuWrap{display:none}
+@media(max-width:700px){
+  #menu .section-head{
+    display:flex!important;flex-wrap:nowrap!important;align-items:center!important;
+    justify-content:center!important;column-gap:8px!important;row-gap:0!important;
+  }
+  #menu .section-head h2{
+    display:inline-block!important;flex:0 1 auto!important;margin:0!important;
+    text-align:center!important;font-size:clamp(25px,7vw,34px)!important;
+    white-space:nowrap!important;
+  }
+  #menu .section-head .eyebrow,#menu .section-head p{display:none!important}
+  #menu .section-head #languageMenuWrap{
+    display:flex!important;align-items:center!important;gap:4px!important;
+    flex:0 0 auto!important;position:relative!important;
+  }
+  #menu .section-head #languageMenu{
+    display:block!important;position:relative!important;top:auto!important;right:auto!important;left:auto!important;
+    transform:none!important;z-index:5!important;flex:0 0 116px!important;
+    width:116px!important;min-width:116px!important;max-width:116px!important;
+    height:34px!important;min-height:34px!important;margin:0!important;
+    padding:0 4px!important;box-sizing:border-box!important;font-size:10px!important;
+    line-height:1.2!important;color:#f4ecdf!important;background:#211c14!important;
+    border:1px solid #9c7d49!important;border-radius:5px!important;
+    appearance:auto!important;-webkit-appearance:menulist!important;
+  }
+  #menu .section-head #languageMenuGlobe{font-size:15px!important;line-height:1!important}
+  header.wrap.site-header .nav #language.language{display:none!important}
+  header.wrap.site-header .nav>a[href="#menu"]{display:none!important}
+}
+@media(max-width:380px){
+  #menu .section-head{column-gap:5px!important}
+  #menu .section-head h2{font-size:25px!important}
+  #menu .section-head #languageMenu{flex-basis:105px!important;width:105px!important;min-width:105px!important;max-width:105px!important;height:32px!important;min-height:32px!important;font-size:9px!important}
+}
+</style>
+<script id="rossini-language-beside-menu-title-final-script">
+(function(){
+  function setupMenuLanguage(){
+    var original=document.getElementById('language');
+    var head=document.querySelector('#menu .section-head');
+    if(!original||!head||document.getElementById('languageMenu')) return;
+    var wrap=document.createElement('span');
+    wrap.id='languageMenuWrap';
+    var globe=document.createElement('span');
+    globe.id='languageMenuGlobe';
+    globe.textContent='🌐';
+    globe.setAttribute('aria-hidden','true');
+    var clone=document.createElement('select');
+    clone.id='languageMenu';
+    clone.className='language';
+    clone.setAttribute('aria-label','Choose language');
+    clone.innerHTML=original.innerHTML;
+    clone.value=original.value;
+    wrap.appendChild(globe);
+    wrap.appendChild(clone);
+    head.appendChild(wrap);
+    clone.addEventListener('change',function(){
+      original.value=clone.value;
+      original.dispatchEvent(new Event('change',{bubbles:true}));
+    });
+    original.addEventListener('change',function(){clone.value=original.value;});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setupMenuLanguage);
+  else setupMenuLanguage();
+})();
+</script>
