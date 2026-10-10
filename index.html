@@ -625,7 +625,37 @@ footer{background:#141311;border-top-color:#40372c;color:#b8ad9c}
 .story-slide-dots span.is-active{width:29px;background:#d6b574}
 @media(max-width:800px){.story-slideshow{height:clamp(230px,58vw,330px);max-width:520px}}
 @media(prefers-reduced-motion:reduce){.story-slide{transition:none;transform:none}}
-</style></head>
+</style><style id="rossini-final-fullscreen-hero">
+/* FINAL OVERRIDES: true viewport-height photo hero, no blank side gutters */
+html,body{margin:0!important;width:100%;max-width:100%;overflow-x:hidden}
+.hero{display:block!important;position:relative!important;width:100%!important;max-width:none!important;height:calc(100vh - 86px)!important;height:calc(100svh - 86px)!important;min-height:620px!important;padding:0!important;margin:0!important;overflow:hidden!important;box-sizing:border-box!important;background:#100d0c!important}
+.hero-inner{display:flex!important;position:relative!important;width:100%!important;max-width:none!important;height:100%!important;min-height:0!important;box-sizing:border-box!important;margin:0!important;padding:56px max(6vw,calc((100vw - 1160px)/2))!important;align-items:center!important;gap:0!important}
+.hero-image{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;min-height:0!important;margin:0!important;box-shadow:none!important;z-index:0!important;overflow:hidden!important}
+.hero-image img{position:absolute!important;inset:0!important;display:block!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center 52%!important;filter:brightness(.68)!important}
+.hero-image:after{content:""!important;position:absolute!important;inset:0!important;border:0!important;background:linear-gradient(90deg,rgba(10,7,7,.84) 0%,rgba(10,7,7,.55) 42%,rgba(10,7,7,.12) 100%),linear-gradient(0deg,rgba(10,7,7,.4),transparent 48%)!important;pointer-events:none}
+.hero-copy{position:relative!important;z-index:2!important;width:min(660px,100%)!important;max-width:660px!important;margin:0!important;align-self:center!important;padding:24px 0 58px!important}
+.hero-copy h1{font-size:clamp(3.5rem,7vw,6.5rem)!important}
+.hero-copy .intro{color:#f2e9dc!important}
+.hero .eyebrow,.hero .hero-note,.hero .hero-signature{color:#e3c27f!important}
+.hero-image .image-caption{left:auto!important;right:6vw!important;bottom:28px!important;z-index:3!important;background:rgba(20,15,12,.84)!important}
+.hero-image .image-number{z-index:3!important}
+@media(max-width:800px){
+ .hero{height:calc(100svh - 68px)!important;min-height:560px!important}
+ .hero-inner{padding:42px 7vw!important}
+ .hero-copy{padding-bottom:65px!important}
+ .hero-image img{object-position:58% center!important}
+ .hero-image:after{background:linear-gradient(90deg,rgba(10,7,7,.77),rgba(10,7,7,.22)),linear-gradient(0deg,rgba(10,7,7,.42),transparent 65%)!important}
+ .hero-image .image-caption{right:5vw!important;bottom:18px!important}
+}
+@media(max-width:520px){
+ .hero{height:calc(100svh - 60px)!important;min-height:540px!important}
+ .hero-inner{padding:32px 6vw!important}
+ .hero-copy h1{font-size:clamp(3rem,13vw,4.4rem)!important}
+ .hero-copy .intro{font-size:1rem!important}
+ .hero-image .image-caption{max-width:75%!important;padding:12px 14px!important}
+}
+</style>
+</head>
 <body>
 <header class="wrap site-header">
 <a class="brand" href="#" aria-label="Ristorante Rossini home"><span class="brand-mark">R</span><span><span class="brand-name">Ristorante Rossini</span><span class="brand-sub">Cucina italiana · dal cuore</span></span></a>
