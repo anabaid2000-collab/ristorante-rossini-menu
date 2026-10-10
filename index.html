@@ -1410,3 +1410,46 @@ applyLanguage();startNotificationListeners();renderNotifications();
   else setupMenuLanguage();
 })();
 </script>
+
+
+<style id="rossini-language-single-button">
+#menu .section-head #languageMenuWrap{display:none}
+@media(max-width:700px){
+  #menu .section-head{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:center!important;gap:8px!important}
+  #menu .section-head h2{flex:0 1 auto!important;margin:0!important;font-size:clamp(24px,6.8vw,33px)!important;white-space:nowrap!important}
+  #menu .section-head .eyebrow,#menu .section-head p{display:none!important}
+  #menu .section-head #languageMenuWrap{display:inline-flex!important;align-items:center!important;justify-content:center!important;flex:0 0 auto!important}
+  #menu .section-head #languageMenuButton{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;height:34px!important;min-height:34px!important;padding:0 10px!important;border:1px solid #9c7d49!important;border-radius:6px!important;background:#211c14!important;color:#f4ecdf!important;font:600 12px/1 sans-serif!important;white-space:nowrap!important;cursor:pointer!important}
+  #menu .section-head #languageMenuButton .globe{font-size:15px!important}
+  #menu .section-head #languageMenuButton .ln{letter-spacing:.04em!important}
+  #menu .section-head #languageMenu{position:absolute!important;opacity:0!important;pointer-events:none!important;width:1px!important;height:1px!important;overflow:hidden!important}
+  header.wrap.site-header .nav #language.language{display:none!important}
+  header.wrap.site-header .nav>a[href="#menu"]{display:none!important}
+}
+</style>
+<script id="rossini-language-single-button-script">
+(function(){
+ function setup(){
+  var original=document.getElementById('language');
+  var head=document.querySelector('#menu .section-head');
+  if(!original||!head||document.getElementById('languageMenuButton')) return;
+  var wrap=document.createElement('span'); wrap.id='languageMenuWrap';
+  var button=document.createElement('button'); button.type='button'; button.id='languageMenuButton';
+  button.setAttribute('aria-label','Change language');
+  button.innerHTML='<span class="globe" aria-hidden="true">🌐</span><span class="ln">LN</span>';
+  var select=document.createElement('select'); select.id='languageMenu'; select.className='language';
+  select.setAttribute('aria-label','Choose language'); select.innerHTML=original.innerHTML; select.value=original.value;
+  wrap.appendChild(button); wrap.appendChild(select); head.appendChild(wrap);
+  button.addEventListener('click',function(){
+   var current=select.value;
+   var options=Array.from(select.options);
+   var index=options.findIndex(function(o){return o.value===current;});
+   select.value=options[(index+1)%options.length].value;
+   original.value=select.value;
+   original.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+  original.addEventListener('change',function(){select.value=original.value;});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
+</script>
