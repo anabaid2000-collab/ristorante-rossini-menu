@@ -1401,12 +1401,12 @@ applyLanguage();startNotificationListeners();renderNotifications();
 
 
 <style id="rossini-floating-menu-filters">
-/* Floating pill effect for category and availability filters */
+/* Baby-pink floating pill effect for category and availability filters */
 #filters.filters{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
-#filters.filters .filter{position:relative;border-radius:999px!important;border:1px solid rgba(214,183,117,.55)!important;background:linear-gradient(145deg,rgba(43,35,25,.96),rgba(24,21,18,.96))!important;color:#f0dfbf!important;box-shadow:0 5px 12px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.06);transform:translateY(0);transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease}
-#filters.filters .filter:hover{transform:translateY(-3px);box-shadow:0 9px 18px rgba(0,0,0,.32),0 2px 8px rgba(214,183,117,.12);border-color:#e1c27d!important}
-#filters.filters .filter.active,#filters.filters .filter.availability-filter.active{background:linear-gradient(135deg,#e1c27d,#b9914d)!important;border-color:#e1c27d!important;color:#21170b!important;box-shadow:0 6px 16px rgba(193,151,76,.24),inset 0 1px 0 rgba(255,255,255,.45)}
-#filters.filters .filter:focus-visible{outline:2px solid #e1c27d;outline-offset:3px}
+#filters.filters .filter{position:relative;border-radius:999px!important;border:1px solid #f3b6cb!important;background:linear-gradient(145deg,#ffe4ed,#f8c5d7)!important;color:#633447!important;box-shadow:0 5px 12px rgba(190,111,142,.22),inset 0 1px 0 rgba(255,255,255,.8);transform:translateY(0);transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease}
+#filters.filters .filter:hover{transform:translateY(-3px);background:linear-gradient(145deg,#ffd9e6,#f3b2ca)!important;box-shadow:0 9px 18px rgba(190,111,142,.28),0 2px 8px rgba(255,220,233,.5);border-color:#e99ab7!important}
+#filters.filters .filter.active,#filters.filters .filter.availability-filter.active{background:linear-gradient(135deg,#f4a9c3,#e88eaf)!important;border-color:#e88eaf!important;color:#492333!important;box-shadow:0 6px 16px rgba(213,119,157,.3),inset 0 1px 0 rgba(255,255,255,.55)}
+#filters.filters .filter:focus-visible{outline:2px solid #e88eaf;outline-offset:3px}
 #filters.filters .filter.filter-separator{box-shadow:none}
 @media(max-width:700px){#filters.filters{gap:8px!important}#filters.filters .filter{padding:9px 14px!important}#filters.filters .filter:hover{transform:translateY(-2px)}}
 @media(prefers-reduced-motion:reduce){#filters.filters .filter{transition:none!important}#filters.filters .filter:hover{transform:none}}
