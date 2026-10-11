@@ -343,17 +343,18 @@ function renderItems(docs){
       <div class="actions"><button class="btn save">Save changes</button><button class="btn red del">Delete</button></div>
     </div>`;
     box.querySelector('.save').onclick=async()=>{
-      const btn=box.querySelector('.save');btn.disabled=true;btn.textContent='Translating…';
+      const btn=box.querySelector('.save');btn.disabled=true;btn.textContent='Saving…';
       try{
         const englishDescription=box.querySelector('.descEn').value.trim();
         const current={...x,name:box.querySelector('.name').value.trim(),description:englishDescription,descriptionEn:englishDescription,badge:box.querySelector('.badge').value.trim()};
-        const translations=await buildTranslations(current,'en');
+        // Saving menu edits must not depend on the external translation provider.
+        // Keep existing translations and let the separate Translate button refresh them.
         await updateDoc(doc(db,'menu',d.id),{
           category:box.querySelector('.category').value,name:current.name,price:box.querySelector('.price').value.trim(),image:box.querySelector('.image').value.trim(),
-          description:englishDescription,descriptionEn:englishDescription,badge:current.badge,available:box.querySelector('.availability').value==='available',order:x.order??999,translations
+          description:englishDescription,descriptionEn:englishDescription,badge:current.badge,available:box.querySelector('.availability').value==='available',order:x.order??999
         });
-        const status=box.querySelector('.translationStatus');if(status)status.textContent='English saved and translated into all 6 languages.';
-      }catch(e){alert('Save/translation failed: '+e.message)}
+        const status=box.querySelector('.translationStatus');if(status)status.textContent='Changes saved. Use “Translate missing/all languages” to refresh translations.';
+      }catch(e){alert('Save failed: '+e.message)}
       finally{btn.disabled=false;btn.textContent='Save changes'}
     };
     box.querySelector('.translateOne').onclick=async()=>{
