@@ -235,10 +235,54 @@ function renderOrders(orders){renderAnalytics(orders);const pending=orders.filte
 function renderCategoryOptions(){const cur=$('newCategory').value;$('newCategory').innerHTML=categories.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');if(categories.includes(cur))$('newCategory').value=cur}
 function renderCategories(all){
  const counts={},foods={};
- all.filter(d=>!isCategoryDoc(d)).forEach(d=>{const x=d.data(),c=String(x.category||'');if(c){counts[c]=(counts[c]||0)+1;(foods[c]||(foods[c]=[])).push({id:d.id,...x})}});
+ all.filter(d=>!isCategoryDoc(d)).forEach(d=>{
+  const x=d.data(),c=String(x.category||'');
+  if(c){counts[c]=(counts[c]||0)+1;(foods[c]||(foods[c]=[])).push({id:d.id,...x});}
+ });
  $('categoriesList').innerHTML=categories.length?categories.map(c=>`<div class="cat-wrap"><div class="cat"><button type="button" class="cat-view" data-viewcat="${esc(c)}" aria-expanded="false"><span>${esc(c)}</span><small>${counts[c]||0} dishes</small><span class="cat-arrow">＋</span></button><button class="btn red delCat" data-cat="${esc(c)}">Delete</button></div><div class="cat-foods hidden" data-foods="${esc(c)}"></div></div>`).join(''):'<div class="note">No categories yet.</div>';
- document.querySelectorAll('.cat-view').forEach(b=>b.onclick=()=>{const c=b.dataset.viewcat,p=document.querySelector('[data-foods="'+CSS.escape(c)+'"]'),open=!p.classList.contains('hidden');document.querySelectorAll('.cat-foods').forEach(x=>x.classList.add('hidden'));document.querySelectorAll('.cat-view').forEach(x=>{x.setAttribute('aria-expanded','false');const a=x.querySelector('.cat-arrow');if(a)a.textContent='＋'});if(!open){p.classList.remove('hidden');b.setAttribute('aria-expanded','true');b.querySelector('.cat-arrow').textContent='−';const list=foods[c]||[];p.innerHTML=list.length?list.map(x=>'<button type="button" class="cat-food" data-jump-item="'+esc(x.id)+'"><img src="'+esc(x.image||'')+'" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'"><span class="cat-food-copy"><strong>'+esc(x.name||'Unnamed dish')+'</strong><small>'+esc(x.price||'')+'</small></span><span class="cat-food-arrow">↗</span></button>').join(''):'<div class="cat-food muted">No food items in this category yet.</div>';p.querySelectorAll('[data-jump-item]').forEach(item=>item.onclick=()=>{const target=document.querySelector('#items .item[data-item-id="'+CSS.escape(item.dataset.jumpItem)+'"]');if(target){target.scrollIntoView({behavior:'smooth',block:'center'});target.classList.remove('item-jump-highlight');void target.offsetWidth;target.classList.add('item-jump-highlight');setTimeout(()=>target.classList.remove('item-jump-highlight'),2200)}else{document.querySelector('#itemsSection')?.scrollIntoView({behavior:'smooth',block:'start')}}})}});
- document.querySelectorAll('.delCat').forEach(b=>b.onclick=async()=>{const c=b.dataset.cat,n=counts[c]||0;if(!confirm(n?`Delete ${c} and its ${n} menu items?`:`Delete ${c}?`))return;try{const snap=await getDocs(menuRef);for(const d of snap.docs){const x=d.data();if((isCategoryDoc(d)&&String(x.name).toLowerCase()===c.toLowerCase())||(!isCategoryDoc(d)&&String(x.category).toLowerCase()===c.toLowerCase()))await deleteDoc(doc(db,'menu',d.id))}}catch(e){alert(e.message)}});
+ document.querySelectorAll('.cat-view').forEach(button=>{
+  button.onclick=()=>{
+   const category=button.dataset.viewcat;
+   const panel=document.querySelector('[data-foods="'+CSS.escape(category)+'"]');
+   if(!panel)return;
+   const wasOpen=!panel.classList.contains('hidden');
+   document.querySelectorAll('.cat-foods').forEach(el=>el.classList.add('hidden'));
+   document.querySelectorAll('.cat-view').forEach(el=>{el.setAttribute('aria-expanded','false');const arrow=el.querySelector('.cat-arrow');if(arrow)arrow.textContent='＋';});
+   if(wasOpen)return;
+   panel.classList.remove('hidden');
+   button.setAttribute('aria-expanded','true');
+   button.querySelector('.cat-arrow').textContent='−';
+   const list=foods[category]||[];
+   panel.innerHTML=list.length?list.map(item=>`<button type="button" class="cat-food" data-jump-item="${esc(item.id)}"><img src="${esc(item.image||'')}" alt="" loading="lazy"><span class="cat-food-copy"><strong>${esc(item.name||'Unnamed dish')}</strong><small>${esc(item.price||'')}</small></span><span class="cat-food-arrow">↗</span></button>`).join(''):'<div class="cat-food muted">No food items in this category yet.</div>';
+   panel.querySelectorAll('[data-jump-item]').forEach(foodButton=>{
+    foodButton.onclick=()=>{
+     const target=document.querySelector('#items .item[data-item-id="'+CSS.escape(foodButton.dataset.jumpItem)+'"]');
+     if(target){
+      target.scrollIntoView({behavior:'smooth',block:'center'});
+      target.classList.remove('item-jump-highlight');
+      void target.offsetWidth;
+      target.classList.add('item-jump-highlight');
+      setTimeout(()=>target.classList.remove('item-jump-highlight'),2200);
+     }else{
+      document.querySelector('#itemsSection')?.scrollIntoView({behavior:'smooth',block:'start'});
+     }
+    };
+   });
+  };
+ });
+ document.querySelectorAll('.delCat').forEach(button=>{
+  button.onclick=async()=>{
+   const category=button.dataset.cat,count=counts[category]||0;
+   if(!confirm(count?`Delete ${category} and its ${count} menu items?`:`Delete ${category}?`))return;
+   try{
+    const snapshot=await getDocs(menuRef);
+    for(const d of snapshot.docs){
+     const x=d.data();
+     if((isCategoryDoc(d)&&String(x.name).toLowerCase()===category.toLowerCase())||(!isCategoryDoc(d)&&String(x.category).toLowerCase()===category.toLowerCase()))await deleteDoc(doc(db,'menu',d.id));
+    }
+   }catch(error){alert(error.message);}
+  };
+ });
 }
 function fileToDataUrl(file,maxSide=1000,quality=.78){return new Promise((resolve,reject)=>{if(!file)return reject(new Error('Choose a photo first.'));if(!file.type.startsWith('image/'))return reject(new Error('Please choose an image.'));const r=new FileReader();r.onerror=()=>reject(new Error('Could not read image.'));r.onload=()=>{const img=new Image();img.onerror=()=>reject(new Error('Could not process image.'));img.onload=()=>{let w=img.naturalWidth,h=img.naturalHeight,s=Math.min(1,maxSide/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);resolve(c.toDataURL('image/jpeg',quality))};img.src=r.result};r.readAsDataURL(file)})}
 const LANG_NAMES={it:"Italiano",en:"English",de:"Deutsch",es:"Español",pt:"Português",fr:"Français"};
